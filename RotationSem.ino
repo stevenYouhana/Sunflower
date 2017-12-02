@@ -10,9 +10,8 @@ int led4 = 5;
 const int READING_INTERVAL = 5;
 const int COMPARE_INTERVAL = 20;
 
-vector<vector<int>> sensors(4);
+int sensors[4][10];
 int averages[4];
-int average = 0;
 
 void setup(){
   Serial.begin(9600);
@@ -46,9 +45,9 @@ void popSensor(){
   delay(5000);
 }
 
-int getAverage(vector<int> sensor){
-  average = 0;
-  for(int i : sensor){
+int getAverage(int sensor[10]){
+  int average = 0;
+  for(int i=0; i<10; i++){
     average += sensor[i];
   }
   return average/10;
