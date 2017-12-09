@@ -1,7 +1,4 @@
-#include <StandardCplusplus.h>
-#include <vector>
 
-using std::vector;
 
 int led1 = 2;
 int led2 = 3;
