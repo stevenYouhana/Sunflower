@@ -1,8 +1,4 @@
-#include <StandardCplusplus.h>
-#include <vector>
-
-using std::vector;
-
+#include "TestClass.hpp" 
 int led1 = 2;
 int led2 = 3;
 int led3 = 4;
@@ -13,6 +9,7 @@ const int COMPARE_INTERVAL = 20000;
 int sensors[4][10];
 int averages[4];
 int** topAves = new int*[2];
+TestClass ts;
 
 void setup(){
   Serial.begin(9600);
@@ -20,6 +17,7 @@ void setup(){
   for(int i=2; i<6; i++){
     pinMode(i,OUTPUT);
   }
+  Serial.println(ts.showNum());
 }
 
 void loop(){
@@ -70,12 +68,11 @@ int** getTopTwo(int avs[4]){
   }
   boolean find=false;
   boolean flag=true;
-//  int _1stSensorValue = sensors[0];
-//  int _2ndSensorValue = sensors[1];
   topAves[0][1] = 0;
   topAves[0][0] = 0;
   topAves[1][0] = avs[0];
   topAves[1][1] = avs[0];
+  //ARRAY CONFIGURATION
   //topAves[0][0] _1stSensorNo
   //topAves[0][1] _2ndSensorNo
   //topAves[1][0] _1stSensorValue
@@ -110,7 +107,6 @@ int** getTopTwo(int avs[4]){
       topAves[1][0] = avs[1];
     }
   }
-  //Serial.print("FIRST VAL: "); Serial.println(_1stSensorValue);
   return topAves;
 }
 void ledFollow(int second, int first){
