@@ -1,4 +1,5 @@
-
+using namespace std;
+#include "ReadingLogic.h"
 
 int led1 = 2;
 int led2 = 3;
@@ -9,7 +10,8 @@ const int READING_INTERVAL = 10000;
 const int COMPARE_INTERVAL = 20000;
 int sensors[4][10];
 int averages[4];
-int* topAves = new int[2];
+
+ReadingLogic readingLogic;
 
 void setup(){
   Serial.begin(9600);
@@ -27,14 +29,11 @@ void loop(){
     averages[i] = getAverage(sensors[i]);
    }
    
-   getTopTwo(averages);
-   Serial.println("TOP BIRDS: ");
-   Serial.println(topAves[0]);
-   Serial.println(topAves[1]);
-   Serial.println("TOP VALUES: ");
-   Serial.println(topAves[2]);
-   Serial.println(topAves[3]);
-   ledFollow(topAves[0],topAves[1]);
+   readingLogic.getTopTwo(averages);
+
+   //ledFollow(topAves[0],topAves[1]);
+   ledFollow(readingLogic.getTopTwo(averages)[0],
+    readingLogic.getTopTwo(averages)[1]);  
 }
 
 void popSensor(){
@@ -59,58 +58,10 @@ int mappedReading(int reading){
   return map(reading,0,1023,0,255);
 }
 
-int* getTopTwo(int avs[4]){
-  for(int i=0; i<4; i++){
-    Serial.println("-----5");
-    Serial.println(avs[i]);
-  }
-  boolean find=false;
-  boolean flag=true;
-//  int _1stSensorValue = sensors[0];
-//  int _2ndSensorValue = sensors[1];
-  topAves[0] = 0;
-  topAves[1] = 0;
-  topAves[2] = avs[0];
-  topAves[3] = avs[0];
-  //topAves[0] _1stSensorNo
-  //topAves[1] _2ndSensorNo
-  //topAves[2] _1stSensorValue
-  //topAves[3] _2ndSensorValue
-  while(flag){
-    for(int i=0; i<4; i++){
-      if(avs[i] > topAves[2]){
-        Serial.println("-----4");
-        find=true;
-        topAves[3] = topAves[2];  //value
-        topAves[1] = topAves[0];         //sensorNo
-        topAves[2] = avs[i];
-        topAves[0] = i;
-      }
-      else if(avs[i] > topAves[3]){
-        Serial.println("-----3");
-        find=true;
-        topAves[1] = i;
-        topAves[3] = avs[i];
-      }
-    }
-    if(find){
-      Serial.println("-----2");
-      //Serial.print("SECOND VAL: "); Serial.println(_2ndSensorValue);
-      flag=false;
-    }
-    else{
-      Serial.println("-----1");
-      topAves[1] = 1;
-      topAves[0] = 1;
-      topAves[3] = avs[1];
-      topAves[2] = avs[1];
-    }
-  }
-  //Serial.print("FIRST VAL: "); Serial.println(_1stSensorValue);
-  return topAves;
-}
 void ledFollow(int second, int first){
   lightsOff();
+  Serial.println("TOP BIRDS");
+  Serial.println(first);Serial.println(second);
   digitalWrite(second+2,HIGH);  //led pins startin from 2
   digitalWrite(first+2,HIGH);
   delay(500);
