@@ -11,7 +11,7 @@ const int COMPARE_INTERVAL = 20000;
 int sensors[4][10];
 int averages[4];
 
-ReadingLogic readingLogic;
+ReadingLogic readingLogic(averages);
 
 void setup(){
   Serial.begin(9600);
@@ -28,12 +28,8 @@ void loop(){
     Serial.println("-----8");
     averages[i] = getAverage(sensors[i]);
    }
-   
-   readingLogic.getTopTwo(averages);
-
-   //ledFollow(topAves[0],topAves[1]);
-   ledFollow(readingLogic.getTopTwo(averages)[0],
-    readingLogic.getTopTwo(averages)[1]);  
+   ledFollow(readingLogic.getTopTwo()[0],
+    readingLogic.getTopTwo()[1]);
 }
 
 void popSensor(){
