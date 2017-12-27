@@ -22,14 +22,15 @@ void setup(){
 }
 
 void loop(){
+  //ledTest();
   popSensor();
    //ADD AVS TO AVERAGES 
    for(int i=0; i<4; i++){
     Serial.println("-----8");
     averages[i] = getAverage(sensors[i]);
    }
-   ledFollow(readingLogic.getTopTwo()[0],
-    readingLogic.getTopTwo()[1]);
+   ledFollow(readingLogic.returnTopThree()[0],
+    readingLogic.returnTopThree()[1]);
 }
 
 void popSensor(){
@@ -53,7 +54,13 @@ int getAverage(int sensor[10]){
 int mappedReading(int reading){
   return map(reading,0,1023,0,255);
 }
-
+void ledTest(){
+  for(int i=2; i<6; i++){
+    digitalWrite(i,HIGH);
+    delay(500);
+    digitalWrite(i,LOW);
+  }
+}
 void ledFollow(int second, int first){
   lightsOff();
   Serial.println("TOP BIRDS");

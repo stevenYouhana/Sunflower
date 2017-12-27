@@ -6,10 +6,11 @@
 class ReadingLogic{
 	public:
 		ReadingLogic(int* averages);
-		int* getTopTwo();
-
+    ~ReadingLogic(){};
+		int* returnTopThree();
 	private:
-		int* _averages;
-		int* topAves;
+		int*  _averages;
+		int _topThree[5];
+
 };
 #endif
