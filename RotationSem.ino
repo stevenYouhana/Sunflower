@@ -1,5 +1,6 @@
 using namespace std;
 #include "ReadingLogic.h"
+#include <Stepper.h>
 
 int led1 = 2;
 int led2 = 3;
@@ -13,8 +14,14 @@ int averages[4];
 
 ReadingLogic readingLogic(averages);
 
+//MOTOR VARS
+const int stepsPerRevolution = 150;
+//Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
+
+
 void setup(){
   Serial.begin(9600);
+  //myStepper.setSpeed(60);
   Serial.println("start...");
   for(int i=2; i<6; i++){
     pinMode(i,OUTPUT);
@@ -22,15 +29,16 @@ void setup(){
 }
 
 void loop(){
+  motorTest();
   //ledTest();
-  popSensor();
-   //ADD AVS TO AVERAGES 
-   for(int i=0; i<4; i++){
-    Serial.println("-----8");
-    averages[i] = getAverage(sensors[i]);
-   }
-   ledFollow(readingLogic.returnTopThree()[0],
-    readingLogic.returnTopThree()[1]);
+//  popSensor();
+//   //ADD AVS TO AVERAGES 
+//   for(int i=0; i<4; i++){ 
+//    Serial.println("-----8");
+//    averages[i] = getAverage(sensors[i]);
+//   }
+//   ledFollow(readingLogic.returnTopThree()[0],
+//    readingLogic.returnTopThree()[1]);
 }
 
 void popSensor(){
@@ -75,6 +83,29 @@ void lightsOff(){
   for(int i=2; i<6; i++){
     digitalWrite(i,LOW);
   }
+}
+void motorTest(){
+  //Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
+  digitalWrite(8,HIGH);
+  digitalWrite(9,LOW);
+  digitalWrite(10,LOW);
+  digitalWrite(11,LOW);
+  delay(5);
+   digitalWrite(8,LOW);
+  digitalWrite(9,HIGH);
+  digitalWrite(10,LOW);
+  digitalWrite(11,LOW);
+  delay(5);
+  digitalWrite(8,LOW);
+  digitalWrite(9,LOW);
+  digitalWrite(10,HIGH);
+  digitalWrite(11,LOW);
+  delay(5);
+  digitalWrite(8,LOW);
+  digitalWrite(9,LOW);
+  digitalWrite(10,LOW);
+  digitalWrite(11,HIGH);
+  delay(5);
 }
 
 
