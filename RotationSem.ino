@@ -1,6 +1,6 @@
 using namespace std;
 #include "ReadingLogic.h"
-#include <Stepper.h>
+#include "Motor_HalfStep.h"
 
 int led1 = 2;
 int led2 = 3;
@@ -15,7 +15,7 @@ int averages[4];
 ReadingLogic readingLogic(averages);
 
 //MOTOR VARS
-const int stepsPerRevolution = 150;
+
 //Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
 
 
@@ -65,7 +65,7 @@ int mappedReading(int reading){
 void ledTest(){
   for(int i=2; i<6; i++){
     digitalWrite(i,HIGH);
-    delay(500);
+    delay(10);
     digitalWrite(i,LOW);
   }
 }
@@ -75,9 +75,9 @@ void ledFollow(int second, int first){
   Serial.println(first);Serial.println(second);
   digitalWrite(second+2,HIGH);  //led pins startin from 2
   digitalWrite(first+2,HIGH);
-  delay(500);
+  delay(10);
   digitalWrite(first+2 ,LOW);
-  delay(500);
+  delay(10);
 }
 void lightsOff(){
   for(int i=2; i<6; i++){
@@ -86,21 +86,50 @@ void lightsOff(){
 }
 void motorTest(){
   //Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
+  //HALF-STEPPING
+  //1
+  digitalWrite(8,HIGH);
+  digitalWrite(9,LOW);
+  digitalWrite(10,LOW);
+  digitalWrite(11,HIGH);
+  delay(5);
+  //2
   digitalWrite(8,HIGH);
   digitalWrite(9,LOW);
   digitalWrite(10,LOW);
   digitalWrite(11,LOW);
   delay(5);
-   digitalWrite(8,LOW);
+  //3
+  digitalWrite(8,HIGH);
   digitalWrite(9,HIGH);
   digitalWrite(10,LOW);
   digitalWrite(11,LOW);
   delay(5);
+  //4
+  digitalWrite(8,LOW);
+  digitalWrite(9,HIGH);
+  digitalWrite(10,LOW);
+  digitalWrite(11,LOW);
+  delay(5);
+  //5
+  digitalWrite(8,LOW);
+  digitalWrite(9,HIGH);
+  digitalWrite(10,HIGH);
+  digitalWrite(11,LOW);
+  delay(5);
+  //6
   digitalWrite(8,LOW);
   digitalWrite(9,LOW);
   digitalWrite(10,HIGH);
   digitalWrite(11,LOW);
   delay(5);
+  //7
+  digitalWrite(8,LOW);
+  digitalWrite(9,LOW);
+  digitalWrite(10,HIGH);
+  digitalWrite(11,HIGH);
+  delay(5);
+  //8
   digitalWrite(8,LOW);
   digitalWrite(9,LOW);
   digitalWrite(10,LOW);
