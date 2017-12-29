@@ -10,12 +10,15 @@ class Motor_HalfStep {
     ~Motor_HalfStep(){};
     void clockwise();
     void untiClockwise();
-    void stop();
+    void counter();
+    void kill();
   private:
-    int _delayBetweenStep = 0;
+    int _delayBetweenStep;
     int _pin1;
     int _pin2;
     int _pin3;
     int _pin4;
+    int _stepCounter = 0;
+    void _abstractRotation(int step);
 };
 #endif

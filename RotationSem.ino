@@ -13,15 +13,11 @@ int sensors[4][10];
 int averages[4];
 
 ReadingLogic readingLogic(averages);
-
-//MOTOR VARS
-
-//Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
+Motor_HalfStep mhs(1,8,9,10,11);
 
 
 void setup(){
   Serial.begin(9600);
-  //myStepper.setSpeed(60);
   Serial.println("start...");
   for(int i=2; i<6; i++){
     pinMode(i,OUTPUT);
@@ -29,7 +25,10 @@ void setup(){
 }
 
 void loop(){
-  motorTest();
+  mhs.clockwise();
+  delay(1000);
+  mhs.untiClockwise();
+  delay(1000);
   //ledTest();
 //  popSensor();
 //   //ADD AVS TO AVERAGES 
@@ -83,58 +82,6 @@ void lightsOff(){
   for(int i=2; i<6; i++){
     digitalWrite(i,LOW);
   }
-}
-void motorTest(){
-  //Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
-  //HALF-STEPPING
-  //1
-  digitalWrite(8,HIGH);
-  digitalWrite(9,LOW);
-  digitalWrite(10,LOW);
-  digitalWrite(11,HIGH);
-  delay(5);
-  //2
-  digitalWrite(8,HIGH);
-  digitalWrite(9,LOW);
-  digitalWrite(10,LOW);
-  digitalWrite(11,LOW);
-  delay(5);
-  //3
-  digitalWrite(8,HIGH);
-  digitalWrite(9,HIGH);
-  digitalWrite(10,LOW);
-  digitalWrite(11,LOW);
-  delay(5);
-  //4
-  digitalWrite(8,LOW);
-  digitalWrite(9,HIGH);
-  digitalWrite(10,LOW);
-  digitalWrite(11,LOW);
-  delay(5);
-  //5
-  digitalWrite(8,LOW);
-  digitalWrite(9,HIGH);
-  digitalWrite(10,HIGH);
-  digitalWrite(11,LOW);
-  delay(5);
-  //6
-  digitalWrite(8,LOW);
-  digitalWrite(9,LOW);
-  digitalWrite(10,HIGH);
-  digitalWrite(11,LOW);
-  delay(5);
-  //7
-  digitalWrite(8,LOW);
-  digitalWrite(9,LOW);
-  digitalWrite(10,HIGH);
-  digitalWrite(11,HIGH);
-  delay(5);
-  //8
-  digitalWrite(8,LOW);
-  digitalWrite(9,LOW);
-  digitalWrite(10,LOW);
-  digitalWrite(11,HIGH);
-  delay(5);
 }
 
 

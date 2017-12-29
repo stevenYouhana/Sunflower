@@ -11,6 +11,5 @@ class ReadingLogic{
 	private:
 		int*  _averages;
 		int _topThree[5];
-
 };
 #endif
