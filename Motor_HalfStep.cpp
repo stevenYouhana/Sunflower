@@ -107,5 +107,5 @@ void Motor_HalfStep::kill(){
   digitalWrite(_pin2,LOW);
   digitalWrite(_pin3,LOW);
   digitalWrite(_pin4,LOW);
-  this -> _stepCounter = 0;
+  this-> _stepCounter = 0;
 }

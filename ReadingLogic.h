@@ -1,13 +1,13 @@
-#ifndef ReadingLogic_h
-#define ReadingLogic_h
+#ifndef Reading_h
+#define Reading_h
 
 #include "Arduino.h"
-
-class ReadingLogic{
+//Class RENAMED FROM ReadingLogic to Reading
+class Reading{
 	public:
-		ReadingLogic(int* averages);
-    ~ReadingLogic(){};
-		int* returnTopThree();
+		Reading(int* averages);
+    ~Reading(){};
+		//int* returnTopThree(); NOT USED
 	private:
 		int*  _averages;
 		int _topThree[5];

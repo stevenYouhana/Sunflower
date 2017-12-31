@@ -1,11 +1,11 @@
 #include "Arduino.h"
-#include "ReadingLogic.h"
-
-ReadingLogic::ReadingLogic(int* averages) {
-	_averages = averages;
+#include "Reading.h"
+//CLASS RENAMED FROM ReadingLogic to Reading
+Reading::Reading(int* _averages) {
+	this-> _averages = _averages;
 }
-
-int* ReadingLogic::returnTopThree() {
+//NOW VOID since this class is being used as composition for FlowerRotation
+void Reading::returnTopThree() {
   int tempHighest = 3;
   int tempSecond = 2;
   int tempThird = 1;
@@ -45,5 +45,4 @@ int* ReadingLogic::returnTopThree() {
   if ((_topThree[0] == 0 && _topThree[1] == 2 ) || (_topThree[0] == 1 && _topThree[1] == 3) || (_topThree[0] == 2 && _topThree[1] == 0) || (_topThree[0] == 3 && _topThree[1] == 1)) {
       _topThree[1] = _topThree[2];
   }
-  return _topThree;
 }
