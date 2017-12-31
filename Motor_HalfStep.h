@@ -10,7 +10,6 @@ class Motor_HalfStep {
     ~Motor_HalfStep(){};
     void clockwise();
     void untiClockwise();
-    void counter();
     void kill();
   private:
     int _delayBetweenStep;

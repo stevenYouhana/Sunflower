@@ -4,7 +4,6 @@
 This Motor has a Gear ratio of 64, and Stride Angle 5.625° so this motor has 4096 Steps.
  steps = Number of steps in One Revolution * Gear ratio
  steps= (360°/5.625°)*64"Gear ratio" = 64 * 64 =4096
- this value will substitute it on The arduino Sketch
  */
 Motor_HalfStep::Motor_HalfStep(int delayBetweenStep,int pin1,
   int pin2,int pin3, int pin4){
