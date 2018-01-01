@@ -11,5 +11,6 @@ class FlowerRotation {
     void rotate();
   private:
     Reading _reading;
+    Motor _motor;
 };
 #endif

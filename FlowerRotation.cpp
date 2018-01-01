@@ -7,6 +7,7 @@
 //This class will be use in .ino (main)
 FlowerRotation::FlowerRotation(Reading _reading, Motor _motor){
   this-> _reading = _reading;
+  this-> _motor = _motor;
 }
 FlowerRotation::rotate(){
 
