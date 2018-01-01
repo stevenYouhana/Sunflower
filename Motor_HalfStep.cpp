@@ -1,11 +1,12 @@
 #include "Arduino.h"
-#include "Motor_HalfStep.h"
+#include "Motor.h"
 /*
 This Motor has a Gear ratio of 64, and Stride Angle 5.625° so this motor has 4096 Steps.
  steps = Number of steps in One Revolution * Gear ratio
  steps= (360°/5.625°)*64"Gear ratio" = 64 * 64 =4096
  */
-Motor_HalfStep::Motor_HalfStep(int delayBetweenStep,int pin1,
+ //This is class will be used in .ino (main) only to for setup
+Motor::Motor(int delayBetweenStep,int pin1,
   int pin2,int pin3, int pin4){
   _delayBetweenStep = delayBetweenStep;
   _pin1 = pin1;
@@ -18,7 +19,7 @@ Motor_HalfStep::Motor_HalfStep(int delayBetweenStep,int pin1,
   }
 }
 
-void Motor_HalfStep::_abstractRotation(int step){
+void Motor::_abstractRotation(int step){
   switch (step) {
     case 0:
       //1001
@@ -78,7 +79,7 @@ void Motor_HalfStep::_abstractRotation(int step){
       break;
   }
 }
-void Motor_HalfStep::clockwise(){ Serial.println("CLOCKWISE");
+void Motor::clockwise(){ Serial.println("CLOCKWISE");
   //full round
   while(_stepCounter <= 4096){
     for(int i=0; i<8; i++){
@@ -90,7 +91,7 @@ void Motor_HalfStep::clockwise(){ Serial.println("CLOCKWISE");
   Serial.println(_delayBetweenStep);
   kill();
 }
-void Motor_HalfStep::untiClockwise(){ Serial.println("UNTICLOCKWISE");
+void Motor::untiClockwise(){ Serial.println("UNTICLOCKWISE");
   //full round
   while(_stepCounter <= 4096){
     for(int i=7; i>=0; i--){
@@ -102,7 +103,7 @@ void Motor_HalfStep::untiClockwise(){ Serial.println("UNTICLOCKWISE");
   Serial.println(_delayBetweenStep);
   kill();
 }
-void Motor_HalfStep::kill(){
+void Motor::kill(){
   digitalWrite(_pin1,LOW);
   digitalWrite(_pin2,LOW);
   digitalWrite(_pin3,LOW);

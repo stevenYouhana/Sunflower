@@ -7,7 +7,7 @@
 */
 class FlowerRotation {
   public:
-    FlowerRotation(Reading reading)
+    FlowerRotation(Reading reading, Motor _motor)
     void rotate();
   private:
     Reading _reading;

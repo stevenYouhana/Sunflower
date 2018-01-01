@@ -1,6 +1,6 @@
 using namespace std;
-#include "ReadingLogic.h"
-#include "Motor_HalfStep.h"
+#include "Reading.h"
+#include "Motor.h"
 
 int led1 = 2;
 int led2 = 3;
@@ -12,8 +12,8 @@ const int COMPARE_INTERVAL = 20000;
 int sensors[4][10];
 int averages[4];
 
-ReadingLogic readingLogic(averages);
-Motor_HalfStep mhs(1,8,9,10,11);
+//Reading Reading(averages); NOT USED HERE ANYMORE
+Motor mhs(1,8,9,10,11);
 
 
 void setup(){
@@ -31,13 +31,13 @@ void loop(){
   delay(1000);
   //ledTest();
 //  popSensor();
-//   //ADD AVS TO AVERAGES 
-//   for(int i=0; i<4; i++){ 
+//   //ADD AVS TO AVERAGES
+//   for(int i=0; i<4; i++){
 //    Serial.println("-----8");
 //    averages[i] = getAverage(sensors[i]);
 //   }
-//   ledFollow(readingLogic.returnTopThree()[0],
-//    readingLogic.returnTopThree()[1]);
+//   ledFollow(Reading.returnTopThree()[0],
+//    Reading.returnTopThree()[1]);
 }
 
 void popSensor(){
@@ -83,5 +83,3 @@ void lightsOff(){
     digitalWrite(i,LOW);
   }
 }
-
-

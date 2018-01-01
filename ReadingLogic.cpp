@@ -9,14 +9,15 @@ void Reading::returnTopThree() {
   int tempHighest = 3;
   int tempSecond = 2;
   int tempThird = 1;
-  // Reference for _averagesay _topThree[6] :
-  // _topThree[0]: Index of highest average
-  // _topThree[1]: Index of second highest average
-  // _topThree[2]: Index of third highest average
-  // _topThree[3]: Value of highest average
-  // _topThree[4]: Value of second highest average
-  // _topThree[5]: Value of third highest average
-
+	/*
+   Reference for _averagesay _topThree[6] :
+  * _topThree[0]: Index of highest average
+  * _topThree[1]: Index of second highest average
+  * _topThree[2]: Index of third highest average
+  * _topThree[3]: Value of highest average
+  * _topThree[4]: Value of second highest average
+  * _topThree[5]: Value of third highest average
+*/
   for (int i = 0; i < 4; i++) {
       if (_averages[i] >= tempThird) {
           tempThird = _averages[i];

@@ -1,13 +1,13 @@
-#ifndef Motor_HalfStep_h
-#define Motor_HalfStep_h
+#ifndef Motor_h
+#define Motor_h
 
 #include "Arduino.h"
 
-class Motor_HalfStep {
+class Motor {
   public:
-    Motor_HalfStep(int delayBetweenStep,int pin1,
+    Motor(int delayBetweenStep,int pin1,
       int pin2,int pin3, int pin4);
-    ~Motor_HalfStep(){};
+    ~Motor(){};
     void clockwise();
     void untiClockwise();
     void kill();
