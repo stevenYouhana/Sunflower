@@ -4,8 +4,9 @@
 Reading::Reading(int* _averages) {
 	this-> _averages = _averages;
 }
+Reading::Reading(){};
 //NOW VOID since this class is being used as composition for FlowerRotation
-void Reading::findTopThree() {
+int* Reading::getTopThree() {
   int tempHighest = 3;
   int tempSecond = 2;
   int tempThird = 1;
@@ -46,4 +47,5 @@ void Reading::findTopThree() {
   if ((_topThree[0] == 0 && _topThree[1] == 2 ) || (_topThree[0] == 1 && _topThree[1] == 3) || (_topThree[0] == 2 && _topThree[1] == 0) || (_topThree[0] == 3 && _topThree[1] == 1)) {
       _topThree[1] = _topThree[2];
   }
+	return _topThree;
 }

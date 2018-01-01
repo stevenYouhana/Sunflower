@@ -9,6 +9,6 @@ FlowerRotation::FlowerRotation(Reading _reading, Motor _motor){
   this-> _reading = _reading;
   this-> _motor = _motor;
 }
-FlowerRotation::rotate(){
+void FlowerRotation::rotate(){
 
 }

@@ -6,10 +6,11 @@
 class Reading{
 	public:
 		Reading(int* averages);
+    Reading();
     ~Reading(){};
-		void findTopThree();
+		int* getTopThree();
 	private:
 		int*  _averages;
-		int _topThree[5];
+		int _topThree[5];	//[6]?
 };
 #endif
