@@ -21,12 +21,7 @@ void setup(){
   }
   motor.config(1,8,9,10,11);
 }
-void testMotor(){
-  motor.clockwise();
-  delay(1000);
-  motor.untiClockwise();
-  delay(1000);
-}
+
 void loop(){
   //according to new design
   Reading reading(averages);
@@ -64,13 +59,7 @@ int getAverage(int sensor[10]){
 int mappedReading(int reading){
   return map(reading,0,1023,0,255);
 }
-void ledTest(){
-  for(int i=2; i<6; i++){
-    digitalWrite(i,HIGH);
-    delay(10);
-    digitalWrite(i,LOW);
-  }
-}
+
 void ledFollow(int second, int first){
   lightsOff();
   Serial.println("TOP BIRDS");
@@ -85,4 +74,18 @@ void lightsOff(){
   for(int i=2; i<6; i++){
     digitalWrite(i,LOW);
   }
+}
+//----------------Tests--------------
+void ledTest(){
+  for(int i=2; i<6; i++){
+    digitalWrite(i,HIGH);
+    delay(10);
+    digitalWrite(i,LOW);
+  }
+}
+void testMotor(){
+  motor.clockwise();
+  delay(1000);
+  motor.untiClockwise();
+  delay(1000);
 }
