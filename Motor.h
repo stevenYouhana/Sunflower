@@ -5,9 +5,8 @@
 
 class Motor {
   public:
-    Motor(int delayBetweenStep,int pin1,
-      int pin2,int pin3, int pin4);
-    ~Motor(){};
+    void config(int delayBetweenStep,int pin1,
+      int pin2,int pin3, int pin4)
     void clockwise();
     void untiClockwise();
     void kill();

@@ -7,7 +7,7 @@ class Reading{
 	public:
 		Reading(int* averages);
     ~Reading(){};
-		//int* returnTopThree(); NOT USED
+		void findTopThree();
 	private:
 		int*  _averages;
 		int _topThree[5];
