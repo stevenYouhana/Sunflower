@@ -11,6 +11,6 @@ class Reading{
 		int* getTopThree();
 	private:
 		int*  _averages;
-		int _topThree[5];	//[6]?
+		int _topThree[6];	//[6]?
 };
 #endif

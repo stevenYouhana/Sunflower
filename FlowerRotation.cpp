@@ -10,5 +10,12 @@ FlowerRotation::FlowerRotation(Reading _reading, Motor _motor){
   this-> _motor = _motor;
 }
 void FlowerRotation::rotate(){
-
+  _motor.clockwise();
+  Serial.println("ROTATE");
+  for(int i=0; i<6; i++){
+    Serial.println(_reading.getTopThree()[i]);
+  }
+  //delay(500);
+  //_motor.untiClockwise();
+  //delay(500);
 }

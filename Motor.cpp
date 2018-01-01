@@ -88,6 +88,7 @@ void Motor::clockwise(){ Serial.println("CLOCKWISE");
       delay(_delayBetweenStep);
     }
   }
+  Serial.print("Delay: ");
   Serial.println(_delayBetweenStep);
   kill();
 }

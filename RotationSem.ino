@@ -1,4 +1,3 @@
-using namespace std;
 #include "Reading.h"
 #include "Motor.h"
 #include "FlowerRotation.h"
@@ -20,7 +19,7 @@ void setup(){
   for(int i=2; i<6; i++){
     pinMode(i,OUTPUT);
   }
-  motor.config(1,8,9,10,11);
+  motor.config(5,8,9,10,11);
 }
 
 void loop(){
@@ -29,12 +28,12 @@ void loop(){
   FlowerRotation fr(reading, motor);
   fr.rotate();
   //ledTest();
-//  popSensor();
+  popSensor();
 //   //ADD AVS TO AVERAGES
-//   for(int i=0; i<4; i++){
-//    Serial.println("-----8");
-//    averages[i] = getAverage(sensors[i]);
-//   }
+   for(int i=0; i<4; i++){
+    //Serial.println("-----8");
+    averages[i] = getAverage(sensors[i]);
+   }
 //   ledFollow(Reading.returnTopThree()[0],
 //    Reading.returnTopThree()[1]);
 }
