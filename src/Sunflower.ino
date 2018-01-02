@@ -1,6 +1,5 @@
-#include <Reading.h>
-#include <Motor.h>
-#include <FlowerRotation.h>
+#include "Reading.h"
+#include "FlowerRotation.h"
 
 int led1 = 2;
 int led2 = 3;
@@ -11,7 +10,6 @@ const int READING_INTERVAL = 10000;
 const int COMPARE_INTERVAL = 20000;
 int sensors[4][10];
 int averages[4];
-Motor motor;
 
 void setup(){
   Serial.begin(9600);
@@ -19,13 +17,14 @@ void setup(){
   for(int i=2; i<6; i++){
     pinMode(i,OUTPUT);
   }
-  motor.config(5,8,9,10,11);
+  //motor.config(1,8,9,10,11); depricated
+
 }
 
 void loop(){
   //according to new design
   Reading reading(averages);
-  FlowerRotation fr(reading, motor);
+  FlowerRotation fr(reading);
   fr.rotate();
   //ledTest();
   popSensor();
@@ -84,8 +83,5 @@ void ledTest(){
   }
 }
 void testMotor(){
-  motor.clockwise();
-  delay(1000);
-  motor.untiClockwise();
-  delay(1000);
+
 }

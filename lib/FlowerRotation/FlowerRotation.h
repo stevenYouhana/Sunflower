@@ -9,11 +9,13 @@
 */
 class FlowerRotation {
   public:
-    FlowerRotation(Reading reading, Motor _motor);
+    FlowerRotation(Reading reading);
     ~FlowerRotation(){};
-    void rotate();
+    static void rotate();
+    static void SETUP_MOTOR(int delayBetweenStep,int pin1,
+      int pin2,int pin3, int pin4);
   private:
-    Reading _reading;
-    Motor _motor;
+    static Reading* _reading;
+    static Motor* _motor;
 };
 #endif
