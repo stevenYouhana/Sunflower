@@ -23,8 +23,7 @@ void setup(){
 
 void loop(){
   //according to new design
-  Reading reading(averages);
-  FlowerRotation fr(reading);
+  FlowerRotation fr(averages);
   fr.rotate();
   //ledTest();
   popSensor();

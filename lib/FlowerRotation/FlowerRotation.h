@@ -9,9 +9,9 @@
 */
 class FlowerRotation {
   public:
-    FlowerRotation(Reading reading);
+    FlowerRotation(int* average);
     ~FlowerRotation(){};
-    static void rotate();
+    void rotate();
     static void SETUP_MOTOR(int delayBetweenStep,int pin1,
       int pin2,int pin3, int pin4);
   private:

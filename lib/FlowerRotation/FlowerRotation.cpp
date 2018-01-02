@@ -5,8 +5,8 @@
 
 //This class will need to use both Reading and Motor classes for flower rotation
 //This class will be use in .ino (main)
-FlowerRotation::FlowerRotation(Reading reading){
-  _reading = &reading;
+FlowerRotation::FlowerRotation(int* averages){
+  _reading = new Reading(averages);
 }
 void FlowerRotation::SETUP_MOTOR(int delayBetweenStep,int pin1,
   int pin2,int pin3, int pin4){
