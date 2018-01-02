@@ -1,6 +1,6 @@
-#include "Reading.h"
-#include "Motor.h"
-#include "FlowerRotation.h"
+#include <Reading.h>
+#include <Motor.h>
+#include <FlowerRotation.h>
 
 int led1 = 2;
 int led2 = 3;
