@@ -26,7 +26,7 @@ void loop(){
   //according to new design
   Reading reading(averages);
   FlowerRotation fr(reading, motor);
-  fr.rotate();
+  // fr.rotate();
   //ledTest();
   popSensor();
 //   //ADD AVS TO AVERAGES
