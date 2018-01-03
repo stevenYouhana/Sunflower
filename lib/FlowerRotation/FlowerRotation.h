@@ -15,7 +15,7 @@ class FlowerRotation {
     static void SETUP_MOTOR(int delayBetweenStep,int pin1,
       int pin2,int pin3, int pin4);
   private:
-    static Reading* _reading;
+    Reading* _reading;
     static Motor* _motor;
 };
 #endif

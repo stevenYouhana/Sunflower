@@ -22,5 +22,4 @@ void FlowerRotation::rotate(){
   //_motor.untiClockwise();
   //delay(500);
 }
-Motor* FlowerRotation::_motor = NULL; //ARRGHHHHHHH 3 hours!!
-Reading* FlowerRotation::_reading = NULL;
+Motor* FlowerRotation::_motor = NULL;

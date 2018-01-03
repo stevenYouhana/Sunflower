@@ -1,10 +1,16 @@
-#include "Reading.h"
 #include "FlowerRotation.h"
 
 int led1 = 2;
 int led2 = 3;
 int led3 = 4;
 int led4 = 5;
+
+//MOTOR VARS
+const int A_1 = 8;
+const int A_2= 9;
+const int B_1 = 10;
+const int B_2 = 11;
+const int STEP_DELAY = 1;
 
 const int READING_INTERVAL = 10000;
 const int COMPARE_INTERVAL = 20000;
@@ -18,13 +24,10 @@ void setup(){
     pinMode(i,OUTPUT);
   }
   //motor.config(1,8,9,10,11); depricated
-
+  FlowerRotation::SETUP_MOTOR(STEP_DELAY,A_1,A_2,B_1,B_2);
 }
 
 void loop(){
-  //according to new design
-  FlowerRotation fr(averages);
-  fr.rotate();
   //ledTest();
   popSensor();
 //   //ADD AVS TO AVERAGES
@@ -34,6 +37,8 @@ void loop(){
    }
 //   ledFollow(Reading.returnTopThree()[0],
 //    Reading.returnTopThree()[1]);
+  FlowerRotation fr(averages);
+  fr.rotate();
 }
 
 void popSensor(){
