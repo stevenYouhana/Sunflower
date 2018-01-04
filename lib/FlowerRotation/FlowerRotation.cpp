@@ -17,16 +17,18 @@ void FlowerRotation::SETUP_MOTOR(int delayBetweenStep,int pin1,
 //------------------Logic------------------
 //adjustFlower(int) USED IN MAIN
 void FlowerRotation::adjustFlower(){
-  //set _angle
+  //confirm angle is no larger than 90 then pass that value to the motor function
   if(map4096_90(rotationAngle(_reading->getFirstValue(),
     _reading->getSecondValue())) <= 90){
-    _motor->toAngle(_angle);
+
+    _motor->toAngle(map4096_90(rotationAngle(_reading->getFirstValue(),
+      _reading->getSecondValue())));
   }
 }
 int FlowerRotation::map4096_90(float angle){
   //mapRange(double a1,double a2,double b1,double b2,double s)
   const int MAX_STEPS = 4096;
-  return (static_cast<int>(RadToDeg(angle))) * MAX_STEPS/90;
+  return (static_cast<int>(angle)) * MAX_STEPS/90;
 }
 float FlowerRotation::rotationAngle(int top, int second){
   const int LEG_A_BIG_TRIANGLE = 10; //Random, can totally be changed
@@ -42,7 +44,7 @@ float FlowerRotation::rotationAngle(int top, int second){
   return asin(LEG_A_SMALLER_TRIANGLE * sin(90) / HYPOTENUSE_SMALLER_TRIANGLE);
 }
 //NOT USED HERE
-float FlowerRotation::RadToDeg(float angle) {
+float FlowerRotation::radToDeg(float angle) {
   return ((angle * 180) / M_PI);
 }
 //TESTING METHOD

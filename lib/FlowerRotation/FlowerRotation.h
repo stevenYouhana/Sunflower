@@ -18,9 +18,8 @@ class FlowerRotation {
   private:
     Reading* _reading;
     static Motor* _motor;
-    float _angle = 0.0f;
     float rotationAngle(int top, int second);
-    float RadToDeg(float angle);
+    float radToDeg(float angle);
     int map4096_90(float angle);
 };
 #endif
