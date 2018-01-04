@@ -8,8 +8,7 @@ class Motor {
   public:
     Motor(int delayBetweenStep,int pin1,
   int pin2,int pin3, int pin4);
-    void config(int delayBetweenStep,int pin1,
-      int pin2,int pin3, int pin4);
+    void toAngle(int angle);
     void clockwise();
     void untiClockwise();
     void kill();

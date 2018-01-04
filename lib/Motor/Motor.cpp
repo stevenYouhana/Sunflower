@@ -18,17 +18,13 @@ Motor::Motor(int delayBetweenStep,int pin1,
     _delayBetweenStep = 1;
   }
 }
-
-void Motor::config(int delayBetweenStep,int pin1,
-  int pin2,int pin3, int pin4){
-  _delayBetweenStep = delayBetweenStep;
-  _pin1 = pin1;
-  _pin2 = pin2;
-  _pin3 = pin3;
-  _pin4 = pin4;
-  //set minimum delay value
-  if(_delayBetweenStep <= 0){
-    _delayBetweenStep = 1;
+void Motor::toAngle(int angle){
+  while(_stepCounter <= angle){
+    for(int i=0; i<8; i++){
+      _abstractRotation(i);
+      _stepCounter++;
+      delay(_delayBetweenStep);
+    }
   }
 }
 void Motor::_abstractRotation(int step){

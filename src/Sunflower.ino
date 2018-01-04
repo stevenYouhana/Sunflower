@@ -37,8 +37,10 @@ void loop(){
    }
 //   ledFollow(Reading.returnTopThree()[0],
 //    Reading.returnTopThree()[1]);
+//ROTATION CALLS
   FlowerRotation fr(averages);
-  fr.rotate();
+  //new function (rotate based in worked out angle)
+  fr.adjustFlower();
 }
 
 void popSensor(){
