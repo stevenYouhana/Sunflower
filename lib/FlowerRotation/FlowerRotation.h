@@ -20,6 +20,6 @@ class FlowerRotation {
     static Motor* _motor;
     float rotationAngle(int top, int second);
     float radToDeg(float angle);
-    int map4096_90(float angle);
+    float map90_1024(float angle);
 };
 #endif

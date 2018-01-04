@@ -44,7 +44,7 @@ void loop(){
 }
 
 void popSensor(){
-  Serial.println("-----7");
+  //Serial.println("-----7");
   for(int s=0; s<4; s++){
     for(int r=0; r<10; r++){
       sensors[s][r] = mappedReading(analogRead(s));
@@ -53,7 +53,7 @@ void popSensor(){
 }
 
 int getAverage(int sensor[10]){
-  Serial.println("-----6");
+  //Serial.println("-----6");
   int average = 0;
   for(int i=0; i<10; i++){
     average += sensor[i];

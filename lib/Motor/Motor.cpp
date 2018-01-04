@@ -18,14 +18,16 @@ Motor::Motor(int delayBetweenStep,int pin1,
     _delayBetweenStep = 1;
   }
 }
-void Motor::toAngle(int angle){
-  while(_stepCounter <= angle){
+void Motor::toAngle(int steps){
+  Serial.print("toAngle(): "); Serial.println(steps);
+  while(_stepCounter <= steps){
     for(int i=0; i<8; i++){
       _abstractRotation(i);
       _stepCounter++;
       delay(_delayBetweenStep);
     }
   }
+  kill();
 }
 void Motor::_abstractRotation(int step){
   switch (step) {
