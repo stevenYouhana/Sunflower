@@ -26,7 +26,7 @@ void FlowerRotation::adjustFlower(){
 int FlowerRotation::map4096_90(float angle){
   //mapRange(double a1,double a2,double b1,double b2,double s)
   const int MAX_STEPS = 4096;
-  return (static_cast<int>(RadToDeg(angle))) * MAX_STEPS/90;
+  return (static_cast<int>(angle)) * MAX_STEPS/90;
 }
 float FlowerRotation::rotationAngle(int top, int second){
   const int LEG_A_BIG_TRIANGLE = 10; //Random, can totally be changed
