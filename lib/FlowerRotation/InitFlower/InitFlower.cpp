@@ -8,6 +8,7 @@ InitFlower::InitFlower(int _initLed, int _initSensorReading){
 
 }
 void InitFlower::setFlower(){
+  digitalWrite(_initLed,HIGH);  //working on it
   if(InitFlower::_motor->getDelayBetweenSteps() != 5){
     InitFlower::_motor->setDelayBetweenSteps(5);
   }

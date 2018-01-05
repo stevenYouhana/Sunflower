@@ -11,7 +11,7 @@ class InitFlower : public FlowerRotation {
     ~InitFlower(){};
     static void setFlower();
   private:
-    int _initLed;
+    int _initLed = 0;
     static int _initSensorReading;
     static const int TRIG_POINT = 60;
     static Motor* _motor;

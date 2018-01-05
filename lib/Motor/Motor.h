@@ -12,12 +12,14 @@ class Motor {
     void clockwise();
     void untiClockwise();
     void kill();
+    int getDelayBetweenSteps();
+    void setDelayBetweenSteps(int i);
   private:
     int _delayBetweenStep;
-    int _pin1;
-    int _pin2;
-    int _pin3;
-    int _pin4;
+    int _pin1 = 0;
+    int _pin2 = 0;
+    int _pin3 = 0;
+    int _pin4 = 0;
     int _stepCounter = 0;
     void _abstractRotation(int step);
 };

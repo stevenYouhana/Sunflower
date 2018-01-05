@@ -23,7 +23,6 @@ void setup(){
   for(int i=2; i<6; i++){
     pinMode(i,OUTPUT);
   }
-  //motor.config(1,8,9,10,11); depricated
   FlowerRotation::SETUP_MOTOR(STEP_DELAY,A_1,A_2,B_1,B_2);
 }
 
@@ -34,13 +33,15 @@ void loop(){
    for(int i=0; i<4; i++){
     //Serial.println("-----8");
     averages[i] = getAverage(sensors[i]);
+    Serial.print("av:   ");
+    Serial.println(averages[i]);
    }
-//   ledFollow(Reading.returnTopThree()[0],
-//    Reading.returnTopThree()[1]);
+    // ledFollow(Reading.returnTopThree()[0],
+    //  Reading.returnTopThree()[1]);
 //ROTATION CALLS
   FlowerRotation fr(averages);
-  //new function (rotate based in worked out angle)
   fr.adjustFlower();
+  delay(COMPARE_INTERVAL);
 }
 
 void popSensor(){
@@ -60,9 +61,9 @@ int getAverage(int sensor[10]){
   }
   return average/10;
 }
-
+//MAPPING TO 100
 int mappedReading(int reading){
-  return map(reading,0,1023,0,255);
+  return map(reading,0,1023,0,100);
 }
 
 void ledFollow(int second, int first){
@@ -72,7 +73,7 @@ void ledFollow(int second, int first){
   digitalWrite(second+2,HIGH);  //led pins startin from 2
   digitalWrite(first+2,HIGH);
   delay(10);
-  digitalWrite(first+2 ,LOW);
+  digitalWrite(first+2,LOW);
   delay(10);
 }
 void lightsOff(){

@@ -18,17 +18,6 @@ Motor::Motor(int delayBetweenStep,int pin1,
     _delayBetweenStep = 1;
   }
 }
-void Motor::toAngle(int steps){
-  Serial.print("toAngle(): "); Serial.println(steps);
-  while(_stepCounter <= steps){
-    for(int i=0; i<8; i++){
-      _abstractRotation(i);
-      _stepCounter++;
-      delay(_delayBetweenStep);
-    }
-  }
-  kill();
-}
 void Motor::_abstractRotation(int step){
   switch (step) {
     case 0:
@@ -89,6 +78,17 @@ void Motor::_abstractRotation(int step){
       break;
   }
 }
+void Motor::toAngle(int steps){
+  Serial.print("toAngle(): "); Serial.println(steps);
+  while(_stepCounter <= steps){
+    for(int i=0; i<8; i++){
+      _abstractRotation(i);
+      _stepCounter++;
+      delay(_delayBetweenStep);
+    }
+  }
+  kill();
+}
 void Motor::clockwise(){ Serial.println("CLOCKWISE");
   //full round
   while(_stepCounter <= 4096){
@@ -120,4 +120,10 @@ void Motor::kill(){
   digitalWrite(_pin3,LOW);
   digitalWrite(_pin4,LOW);
   this-> _stepCounter = 0;
+}
+int Motor::getDelayBetweenSteps(){
+  return _delayBetweenStep;
+}
+void Motor::setDelayBetweenSteps(int i){
+  _delayBetweenStep = i;
 }

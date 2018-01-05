@@ -51,6 +51,6 @@ int* Reading::getTopThree() {
   // If not adjacent, take the third highest
   if ((_topThree[0] == 0 && _topThree[1] == 2 ) || (_topThree[0] == 1 && _topThree[1] == 3) || (_topThree[0] == 2 && _topThree[1] == 0) || (_topThree[0] == 3 && _topThree[1] == 1)) {
       _topThree[1] = _topThree[2];
-  }
+  }// Serial.print("first highest: "); Serial.println(_topThree[3]); Serial.print("second highest: "); Serial.println(_topThree[4]);
 	return _topThree;
 }
