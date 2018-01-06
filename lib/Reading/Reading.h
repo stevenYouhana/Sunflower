@@ -8,6 +8,8 @@ class Reading{
 		Reading(int* averages);
     Reading();
     ~Reading(){};
+		int getFirstValue();
+		int getSecondValue();
 		int* getTopThree();
 	private:
 		int*  _averages;
