@@ -23,5 +23,7 @@ class FlowerRotation {
     float rotationAngle(int top, int second);
     float radToDeg(float angle);
     float map90_1024(float angle);
+    // Write to EEPROM? or just declare static
+    static const int currentPos = 0;
 };
 #endif

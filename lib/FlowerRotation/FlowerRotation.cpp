@@ -20,6 +20,7 @@ void FlowerRotation::SETUP_MOTOR(int delayBetweenStep,int pin1,
 //adjustFlower(int) USED IN MAIN
 void FlowerRotation::adjustFlower(){
   //confirm angle is no larger than 90 then pass that value to the motor function
+  // change this to 45
   if(rotationAngle(_reading->getFirstValue(),
     _reading->getSecondValue()) <= 90){
     _motor->toAngle(static_cast<int>(map90_1024(rotationAngle(
