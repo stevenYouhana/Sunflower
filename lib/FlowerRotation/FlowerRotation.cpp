@@ -11,7 +11,6 @@ using::asin;
 //This class will be use in .ino (main)
 FlowerRotation::FlowerRotation(int* averages){
   _reading = new Reading(averages);
-  //_motor->toAngle(50);  //TEST
 }
 
 void FlowerRotation::SETUP_MOTOR(int delayBetweenStep,int pin1,
@@ -70,7 +69,9 @@ void FlowerRotation::rotate(){
     Serial.println(_reading->getTopThree()[i]);
   }
 }
-Motor* FlowerRotation::getMotor(){
-  return _motor;
+Motor FlowerRotation::getMotor(){
+  //used at .ino to for flowe SETUP()
+  Motor m = Motor(_motor->getPin1(),_motor->getPin2(),_motor->getPin3(),_motor->getPin4());
+  return m;
 }
 Motor* FlowerRotation::_motor = NULL;
