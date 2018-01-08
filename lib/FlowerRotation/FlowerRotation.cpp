@@ -1,9 +1,12 @@
 #include "FlowerRotation.h"
 #include "Reading.h"
 #include "Motor.h"
-#include "StandardCplusplus.h"
 #include "Arduino.h"
+#include <cmath>
 
+using::pow;
+using::sqrt;
+using::asin;
 //This class will need to use both Reading and Motor classes for flower rotation
 //This class will be use in .ino (main)
 FlowerRotation::FlowerRotation(int* averages){
@@ -25,13 +28,21 @@ void FlowerRotation::adjustFlower(){
         _reading->getFirstValue(),_reading->getSecondValue()))));
   }
 }
+void decideDirection(){
+
+}
 float FlowerRotation::map90_1024(float angle){
   //mapRange(double a1,double a2,double b1,double b2,double s)
   const int MAX_STEPS = 1024;
   return (angle * MAX_STEPS/90);
 }
+// void globalRotation(int topGlobal, int secondGlo, float fine){ //fine is  rotationAngle return
+//   switch(top){
+//     case 0: if(second)
+//   }
+// }
 float FlowerRotation::rotationAngle(int top, int second){
-  if((top<=100 & top>=0) & (second<=100 & second>=0)){
+  if(((top<=100) & (top>=0)) & ((second<=100) & (second>=0))){
     const int LEG_A_BIG_TRIANGLE = 10; //Random, can totally be changed
     const int LEG_B_BIG_TRIANGLE = 10;
     const float HYPOTENUSE_BIG_TRIANGLE = sqrt(pow(LEG_A_BIG_TRIANGLE, 2) + pow(LEG_B_BIG_TRIANGLE, 2));

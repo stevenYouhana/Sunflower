@@ -23,5 +23,6 @@ class FlowerRotation {
     float rotationAngle(int top, int second);
     float radToDeg(float angle);
     float map90_1024(float angle);
+    int tracker = 0;
 };
 #endif
