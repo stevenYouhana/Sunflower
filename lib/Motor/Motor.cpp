@@ -120,16 +120,12 @@ void Motor::untiClockwise(){ Serial.println("UNTICLOCKWISE");
   Serial.println(_delayBetweenStep);
   kill();
 }
-void Motor::toSetup(int sensorReading,const int TRIG_POINT){
-  while(_stepCounter<=4096 && sensorReading<=TRIG_POINT){
-    for(int i=7; i>=0; i--){
-      Serial.println(sensorReading);
-      _abstractRotation(i);
+void Motor::toSetup_LED(int sensorReading,const int TRIG_POINT,int step){
+  // if(_stepCounter<=4096 && sensorReading<=TRIG_POINT){
+      _abstractRotation(step); //Serial.println(step);
       _stepCounter++;
       delay(_delayBetweenStep);
-    }
-  }
-  kill();
+  //}kill();
 }
 void Motor::kill(){
   digitalWrite(_pin1,LOW);

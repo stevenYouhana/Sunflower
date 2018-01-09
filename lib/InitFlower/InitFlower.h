@@ -9,11 +9,11 @@ class InitFlower{
   public:
     // InitFlower(int _initLed, int _initSensorReading);
     // ~InitFlower(){};
-    static void setFlower(Motor _motor,int _initLed, int _initSensorReading);
+    static void setFlower(int step,int _initLed, int _initSensorReading);
   private:
     //int _initLed = 0;
     static int _initSensorReading;
-    static const int TRIG_POINT = 60;
+    static const int TRIG_POINT = 1020;
     const int stepDelay = 0;
     static Motor* localMotor;
     static boolean _setupComplete;

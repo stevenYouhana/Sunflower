@@ -12,7 +12,7 @@ class Motor {
     void toAngle(int angle);
     void clockwise();
     void untiClockwise();
-    void toSetup(int sensorReading,const int TRIG_POINT);
+    void toSetup_LED(int sensorReading,const int TRIG_POINT,int step);
     void kill();
     int getDelayBetweenSteps();
     void setDelayBetweenSteps(int i);
@@ -20,6 +20,7 @@ class Motor {
     int getPin2();
     int getPin3();
     int getPin4();
+    void _abstractRotation(int step);
   private:
     int _delayBetweenStep;
     int _pin1 = 0;
@@ -27,6 +28,6 @@ class Motor {
     int _pin3 = 0;
     int _pin4 = 0;
     int _stepCounter = 0;
-    void _abstractRotation(int step);
+
 };
 #endif
