@@ -1,6 +1,8 @@
 #include "FlowerRotation.h"
 #include "InitFlower.h"
-#include "Motor.h"
+//#include "Motor.h"
+
+using namespace InitFlower;
 
 int led1 = 2;
 int led2 = 3;
@@ -30,9 +32,10 @@ void setup(){
   FlowerRotation::SETUP_MOTOR(STEP_DELAY,A_1,A_2,B_1,B_2);
   delay(5);
 }
+
 Motor m(STEP_DELAY,A_1,A_2,B_1,B_2);
 void loop(){
-
+  SETUPF(m); //InitFlower
   //setFlower(int step,int _initLed,int _initSensorReading)
 
   //ledTest();
@@ -48,16 +51,12 @@ void loop(){
 //     //  Reading.returnTopThree()[1]);
 // //ROTATION CALLS
 //   FlowerRotation fr(averages);
-  if(step>6){
-    step = 0;
-  }
-  Serial.println(analogRead(A5));
-  if(analogRead(A5) < 200){
-    m._abstractRotation(step);
-    step++; Serial.println("STEP:  ");Serial.println(step);
-  }
-  //delay(500);
-  //delay(COMPARE_INTERVAL);
+  // Serial.println(analogRead(A5));
+  // if(analogRead(A5) < 200){
+  //   m.toSetup_LED();
+  // }
+
+
 }
 
 void popSensor(){

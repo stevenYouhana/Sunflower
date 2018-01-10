@@ -62,13 +62,8 @@ float FlowerRotation::radToDeg(float rad) {
   return ((rad * 180) / M_PI);
 }
 //TESTING METHOD
-void FlowerRotation::rotate(int i){
-  //FlowerRotation::_motor->clockwise();
-
-      FlowerRotation::_motor->_abstractRotation(i);
-      delay(2);
-
-
+void FlowerRotation::rotate(){
+  FlowerRotation::_motor->clockwise();
 }
 Motor FlowerRotation::getMotor(){
   //used at .ino to for flowe SETUP()
