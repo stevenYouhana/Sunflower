@@ -6,6 +6,6 @@
 
 namespace InitFlower{
   void SETUP(Motor* m);
-  extern Motor* localMotor;
+  //extern Motor* localMotor;
 }
 #endif
