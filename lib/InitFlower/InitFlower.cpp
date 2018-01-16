@@ -1,11 +1,10 @@
 #include "Arduino.h"
 #include "Motor.h"
 #include "InitFlower.h"
-namespace InitFlower{
+using namespace InitFlower;
+
+void InitFlower::SETUP(Motor m){
   Motor* localMotor;
-  void SETUPF(Motor m){
-    localMotor = &m;
-    localMotor->toSetup_LED();
-    Serial.println("actually working!");
-  }
+  localMotor = &m;
+  localMotor->toSetup_LED();
 }

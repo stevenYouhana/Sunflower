@@ -5,7 +5,7 @@
 #include "Motor.h"
 
 namespace InitFlower{
-  void SETUPF(Motor m);
+  void SETUP(Motor m);
   extern Motor* localMotor;
 }
 #endif
