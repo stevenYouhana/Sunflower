@@ -1,8 +1,4 @@
 #include "FlowerRotation.h"
-#include "InitFlower.h"
-//#include "Motor.h"
-
-using namespace InitFlower;
 
 int led1 = 2;
 int led2 = 3;
@@ -16,7 +12,7 @@ const int B_1 = 10;
 const int B_2 = 11;
 const int STEP_DELAY = 1;
 const char initSensor = 'A5';
-bool isSet;
+bool flowerSet;
 FlowerRotation fr;
 
 const int READING_INTERVAL = 10000;
@@ -30,16 +26,14 @@ void setup(){
   for(int i=2; i<7; i++){
     pinMode(i,OUTPUT);
   }
-  isSet = false;
+  flowerSet = false;
   FlowerRotation::SETUP_MOTOR(STEP_DELAY,A_1,A_2,B_1,B_2);
   delay(5);
 }
 
-Motor m(STEP_DELAY,A_1,A_2,B_1,B_2);
 void loop(){
-  FlowerRotation fr(averages);
-  //check isSet if false initFlower else FlowerRotation
-  if(isSet){
+  //check flowerSet if false initFlower else FlowerRotation
+  if(flowerSet){
     //Normal opperation
     popSensor();
   //   //ADD AVS TO AVERAGES
@@ -49,13 +43,13 @@ void loop(){
       // Serial.print("av:   ");
       // Serial.println(averages[i]);
      }
+     FlowerRotation fr(averages);
   //     // ledFollow(Reading.returnTopThree()[0],
   //     //  Reading.returnTopThree()[1]);
   // //ROTATION CALLS
-     FlowerRotation fr(averages);
   }
   else{
-    SETUP(m); //InitFlower
+    fr.setFlower();   //add to FlowerRotation
   }
 
 

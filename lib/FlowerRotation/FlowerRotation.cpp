@@ -1,4 +1,5 @@
 #include "FlowerRotation.h"
+#include "InitFlower.h"
 #include "Reading.h"
 #include "Motor.h"
 #include "Arduino.h"
@@ -7,6 +8,8 @@
 using::pow;
 using::sqrt;
 using::asin;
+
+using namespace InitFlower;
 //This class will need to use both Reading and Motor classes for flower rotation
 //This class will be use in .ino (main)
 FlowerRotation::FlowerRotation(int* averages){
@@ -16,6 +19,9 @@ FlowerRotation::FlowerRotation(int* averages){
 void FlowerRotation::SETUP_MOTOR(int delayBetweenStep,int pin1,
   int pin2,int pin3, int pin4){
   _motor = new Motor(delayBetweenStep,pin1,pin2,pin3,pin4);
+}
+void FlowerRotation::setFlower(){
+  SETUP(_motor);
 }
 //------------------Logic------------------
 //adjustFlower(int) USED IN MAIN

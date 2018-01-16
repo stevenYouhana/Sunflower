@@ -3,8 +3,8 @@
 #include "InitFlower.h"
 using namespace InitFlower;
 
-void InitFlower::SETUP(Motor m){
+void InitFlower::SETUP(Motor* m){
   Motor* localMotor;
-  localMotor = &m;
+  localMotor = m;
   localMotor->toSetup_LED();
 }
