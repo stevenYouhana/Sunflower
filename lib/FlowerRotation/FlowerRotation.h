@@ -23,9 +23,10 @@ class FlowerRotation {
   private:
     Reading* _reading;
     static Motor* _motor;
-    float rotationAngle(int top, int second);
+    float rotationAngle(int top, int second, int topSensor, int secondSensor);
     float radToDeg(float angle);
     float map90_1024(float angle);
-    int tracker = 0;
+    static const int CURRENT_POSITION = 0;
+    int NEXT_POSITION = 0;
 };
 #endif
