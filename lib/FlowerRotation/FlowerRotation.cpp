@@ -34,6 +34,7 @@ void FlowerRotation::update(int currentPosition, int newPosition){
     //rotate newPosition - currentPosition
     _motor->toAngle(angle_steps(static_cast<int>(newPosition - currentPosition)));
   }
+  
 }
 
 float FlowerRotation::angle_steps(float angle){
