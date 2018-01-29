@@ -14,16 +14,16 @@ class FlowerRotation {
     ~FlowerRotation(){};
     void adjustFlower();
     void rotate();
-    static Motor* getMotor();
+    static Motor getMotor();
     static void SETUP_MOTOR(int delayBetweenStep,int pin1,
       int pin2,int pin3, int pin4);
+    void setFlower();
   private:
     Reading* _reading;
     static Motor* _motor;
     float rotationAngle(int top, int second);
     float radToDeg(float angle);
     float map90_1024(float angle);
-    // Write to EEPROM? or just declare static
     static const int currentPos = 0;
 };
 #endif

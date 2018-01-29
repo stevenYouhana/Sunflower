@@ -11,6 +11,10 @@ const int A_2= 9;
 const int B_1 = 10;
 const int B_2 = 11;
 const int STEP_DELAY = 1;
+const int initSensor = A5;
+
+static bool flowerSet;  //THINK!
+FlowerRotation fr;
 
 const int READING_INTERVAL = 10000;
 const int COMPARE_INTERVAL = 20000;
@@ -20,28 +24,43 @@ int averages[4];
 void setup(){
   Serial.begin(9600);
   Serial.println("start...");
-  for(int i=2; i<6; i++){
+  for(int i=2; i<7; i++){
     pinMode(i,OUTPUT);
   }
   FlowerRotation::SETUP_MOTOR(STEP_DELAY,A_1,A_2,B_1,B_2);
+  flowerSet = false;
+  delay(5);
 }
 
 void loop(){
-  //ledTest();
+  //check flowerSet if false initFlower else FlowerRotation
+
+  while(!flowerSet){
+    if(mappedReading((analogRead(initSensor))) < 30){
+      Serial.println("setting flower...");
+      Serial.println(mappedReading(analogRead(initSensor)));
+      fr.setFlower();
+    }
+    else{
+      flowerSet = true;
+      break;
+    }
+  }
+  Serial.println("Normal operation...");
+  Serial.println(mappedReading(analogRead(initSensor)));
+  //Normal opperation
   popSensor();
-//   //ADD AVS TO AVERAGES
+   //ADD AVS TO AVERAGES
    for(int i=0; i<4; i++){
-    //Serial.println("-----8");
+    Serial.println("-----8");
     averages[i] = getAverage(sensors[i]);
-    Serial.print("av:   ");
-    Serial.println(averages[i]);
-   }
-    // ledFollow(Reading.returnTopThree()[0],
-    //  Reading.returnTopThree()[1]);
-//ROTATION CALLS
-  FlowerRotation fr(averages);
-  fr.adjustFlower();
-  delay(COMPARE_INTERVAL);
+    // Serial.print("av:   ");
+    // Serial.println(averages[i]);
+    FlowerRotation fr(averages);
+ //     // ledFollow(Reading.returnTopThree()[0],
+ //     //  Reading.returnTopThree()[1]);
+  }
+  delay(3000);
 }
 
 void popSensor(){
