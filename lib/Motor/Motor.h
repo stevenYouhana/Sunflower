@@ -10,7 +10,8 @@ class Motor {
   int pin2,int pin3, int pin4);
     Motor(int pin1,int pin2,int pin3, int pin4);
     Motor(){};
-    void toAngle(int angle);
+    void toAngleClockwise(int angle);
+    void toAngleUnticlockwise(int steps);
     void clockwise();
     void untiClockwise();
     void toSetup_LED();

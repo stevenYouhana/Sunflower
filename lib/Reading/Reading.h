@@ -10,7 +10,9 @@ class Reading{
     ~Reading(){};
 		int getFirstValue();
 		int getSecondValue();
-		int* getTopThree();
+		int getFirstSensor();
+		int getSecondSensor();
+		void getTopThree();
 	private:
 		int*  _averages;
 		int _topThree[6];	//[6]?

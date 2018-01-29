@@ -25,32 +25,36 @@ void FlowerRotation::setFlower(){
 }
 //------------------Logic------------------
 
-void FlowerRotation::update(int currentPosition, int newPosition){
+void FlowerRotation::update(){
+  rotationAngle(_reading->getFirstValue(),_reading->getSecondValue(),
+    _reading->getFirstSensor(),_reading->getSecondSensor());
   if(newPosition < currentPosition){
     //rotate currentPosition - newPosition
-    _motor->toAngle(angle_steps(static_cast<int>(currentPosition - newPosition)));
-  }
-  else{
+    if (currentPosition - newPosition < 180) {
+      Serial.print("ANTI: "); Serial.println(newPosition);
+      _motor->toAngleUnticlockwise(angle_steps(static_cast<int>(currentPosition - newPosition)));
+    } else {
+      _motor->toAngleClockwise(angle_steps(static_cast<int>(currentPosition - newPosition)));
+      Serial.print("CLOCK: "); Serial.println(newPosition);
+    }
+}
+  else {
     //rotate newPosition - currentPosition
-    _motor->toAngle(angle_steps(static_cast<int>(newPosition - currentPosition)));
+    if (newPosition - currentPosition < 180) {
+      _motor->toAngleUnticlockwise(angle_steps(static_cast<int>(newPosition - currentPosition)));
+      Serial.print("ANTI: "); Serial.println(newPosition);
+    } else {
+      _motor->toAngleClockwise(angle_steps(static_cast<int>(newPosition - currentPosition)));
+      Serial.print("CLOCK: "); Serial.println(newPosition);
+    }
   }
-  
+  currentPosition = newPosition;
 }
 
 float FlowerRotation::angle_steps(float angle){
   const int MAX_STEPS = 2048;
   return (angle * MAX_STEPS/180);
 }
-float FlowerRotation::map90_1024(float angle){
-  //mapRange(double a1,double a2,double b1,double b2,double s)
-  const int MAX_STEPS = 1024;
-  return (angle * MAX_STEPS/90);
-}
-// void globalRotation(int topGlobal, int secondGlo, float fine){ //fine is  rotationAngle return
-//   switch(top){
-//     case 0: if(second)
-//   }
-// }
 
 int FlowerRotation::getTopSensorAngle(int topSensor) {
   int ANGLE_TOP_SENSOR;
@@ -72,7 +76,7 @@ int FlowerRotation::getTopSensorAngle(int topSensor) {
   return ANGLE_TOP_SENSOR;
 }
 
-float FlowerRotation::rotationAngle(int top, int second, int topSensor, int secondSensor)
+void FlowerRotation::rotationAngle(int top, int second, int topSensor, int secondSensor){
   int MINOR_ADJUSTMENT = 0;
 
   if(((top<=100) & (top>=0)) & ((second<=100) & (second>=0))){
@@ -85,16 +89,14 @@ float FlowerRotation::rotationAngle(int top, int second, int topSensor, int seco
     float HYPOTENUSE_SMALLER_TRIANGLE = sqrt(pow(LEG_A_SMALL_TRIANGLE, 2) + pow(LEG_A_SMALLER_TRIANGLE, 2));
     // Angle refers to the angle of rotation from the midpoint of Top Sensor and Second Sensor
     // This angle is in radians
-    MINOR_ADJUSTMENT = radToDeg(asin(LEG_A_SMALLER_TRIANGLE / HYPOTENUSE_SMALLER_TRIANGLE))
+    MINOR_ADJUSTMENT = radToDeg(asin(LEG_A_SMALLER_TRIANGLE / HYPOTENUSE_SMALLER_TRIANGLE));
   }
 
-  if (topSensor == 0 && secondSensor == 1 || (topSensor > 0 && topSensor < secondSensor) {
-    NEXT_POSITION = getTopSensorAngle(topSensor) + 45 - MINOR_ADJUSTMENT;
+  if (topSensor == 0 && secondSensor == 1 || (topSensor > 0 && topSensor < secondSensor)) {
+    newPosition = getTopSensorAngle(topSensor) + 45 - MINOR_ADJUSTMENT;
   } else {
-    NEXT_POSITION = getTopSensorAngle(topSensor) - 45 + MINOR_ADJUSTMENT;
+    newPosition = getTopSensorAngle(topSensor) - 45 + MINOR_ADJUSTMENT;
   }
-
-  return NEXT_POSITION;
 }
 
 float FlowerRotation::radToDeg(float rad) {
@@ -110,3 +112,4 @@ Motor FlowerRotation::getMotor(){
   return m;
 }
 Motor* FlowerRotation::_motor = NULL;
+float FlowerRotation::currentPosition = 0;

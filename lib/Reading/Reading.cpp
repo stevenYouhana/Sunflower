@@ -6,12 +6,19 @@ Reading::Reading(int* _averages) {
 }
 Reading::Reading(){};
 int Reading::getFirstValue(){
-	return getTopThree()[3];
+	return _topThree[3];
 }
 int Reading::getSecondValue(){
-	return getTopThree()[4];
+	return _topThree[4];
 }
-int* Reading::getTopThree() {
+int Reading::getFirstSensor(){
+	return _topThree[0];
+}
+int Reading::getSecondSensor(){
+	return _topThree[1];
+}
+
+void Reading::getTopThree() {
   int tempHighest = 3;
   int tempSecond = 2;
   int tempThird = 1;

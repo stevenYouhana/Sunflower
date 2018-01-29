@@ -14,8 +14,9 @@ class FlowerRotation {
     ~FlowerRotation(){};
     void adjustFlower();
     void rotate();
-    void update(int currentPosition, int newPosition);
+    void update();
     float angle_steps(float angle);
+    int getTopSensorAngle(int topSensor);
     static Motor getMotor();
     static void SETUP_MOTOR(int delayBetweenStep,int pin1,
       int pin2,int pin3, int pin4);
@@ -23,10 +24,10 @@ class FlowerRotation {
   private:
     Reading* _reading;
     static Motor* _motor;
-    float rotationAngle(int top, int second, int topSensor, int secondSensor);
+    void rotationAngle(int top, int second, int topSensor, int secondSensor);
     float radToDeg(float angle);
     float map90_1024(float angle);
-    static const int CURRENT_POSITION = 0;
-    int NEXT_POSITION = 0;
+    unsigned static float currentPosition;
+    unsigned float newPosition = 0;
 };
 #endif

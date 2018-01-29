@@ -57,10 +57,11 @@ void loop(){
     // Serial.print("av:   ");
     // Serial.println(averages[i]);
     FlowerRotation fr(averages);
+    fr.update();
  //     // ledFollow(Reading.returnTopThree()[0],
  //     //  Reading.returnTopThree()[1]);
   }
-  delay(3000);
+  delay(7000);
 }
 
 void popSensor(){
