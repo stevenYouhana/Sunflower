@@ -24,28 +24,23 @@ void FlowerRotation::setFlower(){
   SETUP(_motor);
 }
 //------------------Logic------------------
-//adjustFlower(int) USED IN MAIN
-void FlowerRotation::adjustFlower(){
-  //confirm angle is no larger than 90 then pass that value to the motor function
-  if(rotationAngle(_reading->getFirstValue(),
-    _reading->getSecondValue()) <= 90){
-    _motor->toAngle(static_cast<int>(map90_1024(rotationAngle(
-        _reading->getFirstValue(),_reading->getSecondValue()))));
+
+void FlowerRotation::update(int currentPosition, int newPosition){
+  if(newPosition < currentPosition){
+    //rotate currentPosition - newPosition
+    _motor->toAngle(angle_steps(static_cast<int>(currentPosition - newPosition)));
+  }
+  else{
+    //rotate newPosition - currentPosition
+    _motor->toAngle(angle_steps(static_cast<int>(newPosition - currentPosition)));
   }
 }
-void decideDirection(){
 
+float FlowerRotation::angle_steps(float angle){
+  const int MAX_STEPS = 2048;
+  return (angle * MAX_STEPS/180);
 }
-float FlowerRotation::map90_1024(float angle){
-  //mapRange(double a1,double a2,double b1,double b2,double s)
-  const int MAX_STEPS = 1024;
-  return (angle * MAX_STEPS/90);
-}
-// void globalRotation(int topGlobal, int secondGlo, float fine){ //fine is  rotationAngle return
-//   switch(top){
-//     case 0: if(second)
-//   }
-// }
+
 float FlowerRotation::rotationAngle(int top, int second){
   if(((top<=100) & (top>=0)) & ((second<=100) & (second>=0))){
     const int LEG_A_BIG_TRIANGLE = 10; //Random, can totally be changed

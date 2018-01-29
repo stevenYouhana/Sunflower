@@ -4,8 +4,7 @@
 using namespace InitFlower;
 
 void InitFlower::SETUP(Motor* m){
-  // Motor* localMotor;
-  // localMotor = m;
   m->setDelayBetweenSteps(15);
   m->toSetup_LED();
+
 }
