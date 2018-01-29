@@ -29,7 +29,7 @@ void FlowerRotation::adjustFlower(){
   //confirm angle is no larger than 90 then pass that value to the motor function
   // change this to 45
   if(rotationAngle(_reading->getFirstValue(),
-    _reading->getSecondValue()) <= 90){
+    _reading->getSecondValue()) <= 90q){
     _motor->toAngle(static_cast<int>(map90_1024(rotationAngle(
         _reading->getFirstValue(),_reading->getSecondValue()))));
   }
@@ -85,10 +85,12 @@ float FlowerRotation::rotationAngle(int top, int second, int topSensor, int seco
   }
 
   if (topSensor == 0 && secondSensor == 1 || (topSensor > 0 && topSensor < secondSensor) {
-    return getTopSensorAngle(topSensor) + 45 - MINOR_ADJUSTMENT;
+    NEXT_POSITION = getTopSensorAngle(topSensor) + 45 - MINOR_ADJUSTMENT;
   } else {
-    return getTopSensorAngle(topSensor) - 45 + MINOR_ADJUSTMENT;
+    NEXT_POSITION = getTopSensorAngle(topSensor) - 45 + MINOR_ADJUSTMENT;
   }
+
+  return NEXT_POSITION;
 }
 
 float FlowerRotation::radToDeg(float rad) {
