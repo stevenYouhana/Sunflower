@@ -14,6 +14,8 @@ class FlowerRotation {
     ~FlowerRotation(){};
     void adjustFlower();
     void rotate();
+    void update(int currentPosition, int newPosition);
+    float angle_steps(float angle);
     static Motor getMotor();
     static void SETUP_MOTOR(int delayBetweenStep,int pin1,
       int pin2,int pin3, int pin4);
