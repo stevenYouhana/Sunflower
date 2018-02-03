@@ -33,17 +33,19 @@ void FlowerRotation::update(){
     Serial.print("SecondSensor: ");Serial.println(_reading->getSecondSensor());
   if(newPosition < currentPosition){
     //rotate currentPosition - newPosition
-    if (currentPosition - newPosition < 180) {
+    if (currentPosition - newPosition <= 180) {
       Serial.print("ANTI: "); Serial.println(newPosition);
-      _motor->toAngleUnticlockwise(angle_steps(static_cast<int>(currentPosition - newPosition)));
+      _motor->toAngleUnticlockwise(angle_steps(static_cast<int>(
+          currentPosition - newPosition)));
     } else {
-      _motor->toAngleClockwise(angle_steps(static_cast<int>(currentPosition - newPosition)));
+      _motor->toAngleClockwise(angle_steps(static_cast<int>(
+          currentPosition - newPosition)));
       Serial.print("CLOCK: "); Serial.println(newPosition);
     }
 }
   else {
     //rotate newPosition - currentPosition
-    if (newPosition - currentPosition < 180) {
+    if (newPosition - currentPosition <= 180) {
       _motor->toAngleUnticlockwise(angle_steps(static_cast<int>(newPosition - currentPosition)));
       Serial.print("ANTI: "); Serial.println(newPosition);
     } else {
@@ -98,11 +100,14 @@ void FlowerRotation::rotationAngle(int top, int second, int topSensor, int secon
   }
   Serial.print("getTopSensorAngle(topSensor): "); Serial.println(getTopSensorAngle(topSensor));
   Serial.print("MINOR_ADJUSTMENT: "); Serial.println(MINOR_ADJUSTMENT);
-  if (topSensor == 0 && secondSensor == 1 || (topSensor > 0 && topSensor < secondSensor)) {
+  if ((topSensor == 0 && secondSensor == 1) || (topSensor == 3 && secondSensor == 0 )||
+      (topSensor > 0 && topSensor < secondSensor)) {
     newPosition = getTopSensorAngle(topSensor) + 45 - MINOR_ADJUSTMENT;
   } else {
     newPosition = getTopSensorAngle(topSensor) - 45 + MINOR_ADJUSTMENT;
   }
+  Serial.print("NEW POSITION: "); Serial.println(newPosition);
+  Serial.print("CURRENT POSITION: "); Serial.println(currentPosition);
 }
 
 float FlowerRotation::radToDeg(float rad) {

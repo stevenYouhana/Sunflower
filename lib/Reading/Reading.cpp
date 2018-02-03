@@ -64,5 +64,4 @@ void Reading::getTopThree() {
 		Serial.print(i);Serial.print("AVERAGES:    ");
 		Serial.println(_topThree[i]);
 	}
-	return _topThree;
 }
