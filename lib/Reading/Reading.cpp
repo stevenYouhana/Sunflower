@@ -3,6 +3,7 @@
 //CLASS RENAMED FROM ReadingLogic to Reading
 Reading::Reading(int* _averages) {
 	this-> _averages = _averages;
+	getTopThree();
 }
 Reading::Reading(){};
 int Reading::getFirstValue(){
@@ -52,12 +53,16 @@ void Reading::getTopThree() {
           tempHighest = _averages[i];
           _topThree[0] = i;
           _topThree[3] = _averages[i];
-      }
+			}
   }
   // Check if _topThree two readings are from adjacent sensors
   // If not adjacent, take the third highest
   if ((_topThree[0] == 0 && _topThree[1] == 2 ) || (_topThree[0] == 1 && _topThree[1] == 3) || (_topThree[0] == 2 && _topThree[1] == 0) || (_topThree[0] == 3 && _topThree[1] == 1)) {
       _topThree[1] = _topThree[2];
   }// Serial.print("first highest: "); Serial.println(_topThree[3]); Serial.print("second highest: "); Serial.println(_topThree[4]);
+	for(int i=0; i<6; i++){
+		Serial.print(i);Serial.print("AVERAGES:    ");
+		Serial.println(_topThree[i]);
+	}
 	return _topThree;
 }

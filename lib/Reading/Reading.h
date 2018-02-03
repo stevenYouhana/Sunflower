@@ -14,7 +14,7 @@ class Reading{
 		int getSecondSensor();
 		void getTopThree();
 	private:
-		int*  _averages;
+		int*  _averages = nullptr;
 		int _topThree[6];	//[6]?
 };
 #endif

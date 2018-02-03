@@ -12,6 +12,7 @@ using::asin;
 using namespace InitFlower;
 //This class will need to use both Reading and Motor classes for flower rotation
 //This class will be use in .ino (main)
+
 FlowerRotation::FlowerRotation(int* averages){
   _reading = new Reading(averages);
 }
@@ -28,6 +29,8 @@ void FlowerRotation::setFlower(){
 void FlowerRotation::update(){
   rotationAngle(_reading->getFirstValue(),_reading->getSecondValue(),
     _reading->getFirstSensor(),_reading->getSecondSensor());
+    Serial.print("FirstSensor: ");Serial.println(_reading->getFirstSensor());
+    Serial.print("SecondSensor: ");Serial.println(_reading->getSecondSensor());
   if(newPosition < currentPosition){
     //rotate currentPosition - newPosition
     if (currentPosition - newPosition < 180) {
@@ -49,6 +52,8 @@ void FlowerRotation::update(){
     }
   }
   currentPosition = newPosition;
+  delete _reading;
+  _reading = nullptr;
 }
 
 float FlowerRotation::angle_steps(float angle){
@@ -57,8 +62,8 @@ float FlowerRotation::angle_steps(float angle){
 }
 
 int FlowerRotation::getTopSensorAngle(int topSensor) {
-  int ANGLE_TOP_SENSOR;
-
+  int ANGLE_TOP_SENSOR = 0;
+  Serial.print("topSensor"); Serial.println(topSensor);
   switch (topSensor) {
     case 1:
       ANGLE_TOP_SENSOR = 90;
@@ -72,7 +77,7 @@ int FlowerRotation::getTopSensorAngle(int topSensor) {
     default:
       ANGLE_TOP_SENSOR = 0;
   }
-
+  Serial.print("ANGLE_TOP_SENSOR: "); Serial.println(ANGLE_TOP_SENSOR);
   return ANGLE_TOP_SENSOR;
 }
 
@@ -91,7 +96,8 @@ void FlowerRotation::rotationAngle(int top, int second, int topSensor, int secon
     // This angle is in radians
     MINOR_ADJUSTMENT = radToDeg(asin(LEG_A_SMALLER_TRIANGLE / HYPOTENUSE_SMALLER_TRIANGLE));
   }
-
+  Serial.print("getTopSensorAngle(topSensor): "); Serial.println(getTopSensorAngle(topSensor));
+  Serial.print("MINOR_ADJUSTMENT: "); Serial.println(MINOR_ADJUSTMENT);
   if (topSensor == 0 && secondSensor == 1 || (topSensor > 0 && topSensor < secondSensor)) {
     newPosition = getTopSensorAngle(topSensor) + 45 - MINOR_ADJUSTMENT;
   } else {
@@ -104,6 +110,7 @@ float FlowerRotation::radToDeg(float rad) {
 }
 //TESTING METHOD
 void FlowerRotation::rotate(){
+  //reassin motor
   FlowerRotation::_motor->clockwise();
 }
 Motor FlowerRotation::getMotor(){
@@ -111,5 +118,5 @@ Motor FlowerRotation::getMotor(){
   Motor m = Motor(_motor->getPin1(),_motor->getPin2(),_motor->getPin3(),_motor->getPin4());
   return m;
 }
-Motor* FlowerRotation::_motor = NULL;
+Motor* FlowerRotation::_motor = nullptr;
 float FlowerRotation::currentPosition = 0;

@@ -36,7 +36,7 @@ void loop(){
   //check flowerSet if false initFlower else FlowerRotation
 
   while(!flowerSet){
-    if(mappedReading((analogRead(initSensor))) < 30){
+    if(mappedReading((analogRead(initSensor))) < 15){
       Serial.println("setting flower...");
       Serial.println(mappedReading(analogRead(initSensor)));
       fr.setFlower();
@@ -52,15 +52,14 @@ void loop(){
   popSensor();
    //ADD AVS TO AVERAGES
    for(int i=0; i<4; i++){
-    Serial.println("-----8");
     averages[i] = getAverage(sensors[i]);
     // Serial.print("av:   ");
     // Serial.println(averages[i]);
-    FlowerRotation fr(averages);
-    fr.update();
  //     // ledFollow(Reading.returnTopThree()[0],
  //     //  Reading.returnTopThree()[1]);
   }
+  FlowerRotation fr(averages);
+  fr.update();
   delay(7000);
 }
 

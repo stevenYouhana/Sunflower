@@ -11,7 +11,9 @@ class FlowerRotation {
   public:
     FlowerRotation(int* average);
     FlowerRotation(){};
-    ~FlowerRotation(){};
+    ~FlowerRotation(){
+      //delete _reading;
+    };
     void adjustFlower();
     void rotate();
     void update();
@@ -22,12 +24,12 @@ class FlowerRotation {
       int pin2,int pin3, int pin4);
     void setFlower();
   private:
-    Reading* _reading;
+    Reading* _reading = nullptr;
     static Motor* _motor;
     void rotationAngle(int top, int second, int topSensor, int secondSensor);
     float radToDeg(float angle);
     float map90_1024(float angle);
-    unsigned static float currentPosition;
-    unsigned float newPosition = 0;
+    static float currentPosition;
+    float newPosition = 0;
 };
 #endif
