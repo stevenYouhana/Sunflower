@@ -85,7 +85,8 @@ void Motor::_abstractRotation(int step){
       break;
   }
 }
-void Motor::toAngleClockwise(int steps){
+void Motor::toAngleUnticlockwise(int steps){
+  Serial.print("STEPS: ");Serial.println(steps);
   while(_stepCounter <= steps){
     for(int i=0; i<8; i++){
       _abstractRotation(i);
@@ -95,9 +96,10 @@ void Motor::toAngleClockwise(int steps){
   }
   kill();
 }
-void Motor::toAngleUnticlockwise(int steps){
+void Motor::toAngleClockwise(int steps){
+  Serial.print("STEPS: ");Serial.println(steps);
   while (_stepCounter <= steps) {
-    for(int i=8; i>=0; i--){
+    for(int i=7; i>=0; i--){
       _abstractRotation(i);
       _stepCounter++;
       delay(_delayBetweenStep);
@@ -131,7 +133,6 @@ void Motor::untiClockwise(){ Serial.println("UNTICLOCKWISE");
   kill();
 }
 void Motor::toSetup_LED(){
-
   while(_stepCounter <= 100){
     for(int i=7; i>=0; i--){
       _abstractRotation(i);

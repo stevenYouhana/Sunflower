@@ -18,14 +18,14 @@ FlowerRotation::FlowerRotation(int* averages){
 }
 FlowerRotation::~FlowerRotation(){
    delete _reading;
-   delete _motor;
+   //delete _motor;
 }
 void FlowerRotation::SETUP_MOTOR(int delayBetweenStep,int pin1,
   int pin2,int pin3, int pin4){
   _motor = new Motor(delayBetweenStep,pin1,pin2,pin3,pin4);
 }
 void FlowerRotation::setFlower(){
-  SETUP(_motor);
+  SETUP(_motor);  //InitFlower
 }
 //------------------Logic------------------
 
@@ -37,28 +37,27 @@ void FlowerRotation::update(){
   if(newPosition < currentPosition){
     //rotate currentPosition - newPosition
     if (currentPosition - newPosition <= 180) {
-      Serial.print("ANTI: "); Serial.println(newPosition);
+      Serial.print("ANTI: "); Serial.println(static_cast<int>(currentPosition - newPosition));
       _motor->toAngleUnticlockwise(angle_steps(static_cast<int>(
           currentPosition - newPosition)));
     } else {
-      _motor->toAngleClockwise(angle_steps(static_cast<int>(
-          currentPosition - newPosition)));
-      Serial.print("CLOCK: "); Serial.println(newPosition);
+      Serial.print("CLOCK: "); Serial.println(static_cast<int>(currentPosition - newPosition));
+      _motor->toAngleClockwise(angle_steps(static_cast<int>(static_cast<int>(
+          currentPosition - newPosition))));
     }
 }
   else {
     //rotate newPosition - currentPosition
     if (newPosition - currentPosition <= 180) {
+      Serial.print("ANTI: "); Serial.println(static_cast<int>(newPosition - currentPosition));
       _motor->toAngleUnticlockwise(angle_steps(static_cast<int>(newPosition - currentPosition)));
-      Serial.print("ANTI: "); Serial.println(newPosition);
     } else {
+      Serial.print("CLOCK: "); Serial.println(static_cast<int>(newPosition - currentPosition));
       _motor->toAngleClockwise(angle_steps(static_cast<int>(newPosition - currentPosition)));
-      Serial.print("CLOCK: "); Serial.println(newPosition);
     }
   }
+  Serial.println("----------------------------------------------------\n\n");
   currentPosition = newPosition;
-  // delete _reading;
-  // _reading = nullptr;
 }
 
 float FlowerRotation::angle_steps(float angle){

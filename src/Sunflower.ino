@@ -13,7 +13,7 @@ const int B_2 = 11;
 const int STEP_DELAY = 1;
 const int initSensor = A5;
 
-static bool flowerSet;  //THINK!
+bool flowerSet;
 FlowerRotation fr;
 
 const int READING_INTERVAL = 10000;
@@ -36,7 +36,7 @@ void loop(){
   //check flowerSet if false initFlower else FlowerRotation
 
   while(!flowerSet){
-    if(mappedReading((analogRead(initSensor))) < 15){
+    if(mappedReading((analogRead(initSensor))) < 25){
       Serial.println("setting flower...");
       Serial.println(mappedReading(analogRead(initSensor)));
       fr.setFlower();
@@ -57,14 +57,13 @@ void loop(){
     // Serial.println(averages[i]);
  //     // ledFollow(Reading.returnTopThree()[0],
  //     //  Reading.returnTopThree()[1]);
-  }
+    }
   FlowerRotation fr(averages);
   fr.update();
-  delay(7000);
+  delay(10000);
 }
 
 void popSensor(){
-  //Serial.println("-----7");
   for(int s=0; s<4; s++){
     for(int r=0; r<10; r++){
       sensors[s][r] = mappedReading(analogRead(s));
@@ -73,7 +72,6 @@ void popSensor(){
 }
 
 int getAverage(int sensor[10]){
-  //Serial.println("-----6");
   int average = 0;
   for(int i=0; i<10; i++){
     average += sensor[i];

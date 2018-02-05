@@ -6,6 +6,4 @@ using namespace InitFlower;
 void InitFlower::SETUP(Motor* m){
   m->setDelayBetweenSteps(15);
   m->toSetup_LED();
-  delete m;
-  m = nullptr;
 }
