@@ -18,11 +18,14 @@ FlowerRotation::FlowerRotation(int* averages){
 }
 FlowerRotation::~FlowerRotation(){
    delete _reading;
-   //delete _motor;
 }
-void FlowerRotation::SETUP_MOTOR(int delayBetweenStep,int pin1,
-  int pin2,int pin3, int pin4){
-  _motor = new Motor(delayBetweenStep,pin1,pin2,pin3,pin4);
+void FlowerRotation::SETUP_MOTOR(int del,int p1,
+  int p2,int p3, int p4){
+  delayBetweenStep = del;
+  pin1 = p1;
+  pin2 = p2;
+  pin3 = p3;
+  pin4 = p4;
 }
 void FlowerRotation::setFlower(){
   SETUP(_motor);  //InitFlower
@@ -38,22 +41,22 @@ void FlowerRotation::update(){
     //rotate currentPosition - newPosition
     if (currentPosition - newPosition <= 180) {
       Serial.print("ANTI: "); Serial.println(static_cast<int>(currentPosition - newPosition));
-      _motor->toAngleUnticlockwise(angle_steps(static_cast<int>(
+      _motor.toAngleUnticlockwise(angle_steps(static_cast<int>(
           currentPosition - newPosition)));
     } else {
       Serial.print("CLOCK: "); Serial.println(static_cast<int>(currentPosition - newPosition));
-      _motor->toAngleClockwise(angle_steps(static_cast<int>(static_cast<int>(
+      _motor.toAngleClockwise(angle_steps(static_cast<int>(static_cast<int>(
           currentPosition - newPosition))));
     }
-}
+  }
   else {
     //rotate newPosition - currentPosition
     if (newPosition - currentPosition <= 180) {
       Serial.print("ANTI: "); Serial.println(static_cast<int>(newPosition - currentPosition));
-      _motor->toAngleUnticlockwise(angle_steps(static_cast<int>(newPosition - currentPosition)));
+      _motor.toAngleUnticlockwise(angle_steps(static_cast<int>(newPosition - currentPosition)));
     } else {
       Serial.print("CLOCK: "); Serial.println(static_cast<int>(newPosition - currentPosition));
-      _motor->toAngleClockwise(angle_steps(static_cast<int>(newPosition - currentPosition)));
+      _motor.toAngleClockwise(angle_steps(static_cast<int>(newPosition - currentPosition)));
     }
   }
   Serial.println("----------------------------------------------------\n\n");
@@ -118,12 +121,17 @@ float FlowerRotation::radToDeg(float rad) {
 //TESTING METHOD
 void FlowerRotation::rotate(){
   //reassin motor
-  FlowerRotation::_motor->clockwise();
+  FlowerRotation::_motor.clockwise();
 }
-Motor FlowerRotation::getMotor(){
-  //used at .ino to for flowe SETUP()
-  Motor m = Motor(_motor->getPin1(),_motor->getPin2(),_motor->getPin3(),_motor->getPin4());
-  return m;
-}
-Motor* FlowerRotation::_motor = nullptr;
+// Motor FlowerRotation::getMotor(){
+//   //used at .ino to for flowe SETUP()
+//   Motor m = Motor(_motor.getPin1(),_motor.getPin2(),_motor.getPin3(),_motor.getPin4());
+//   return m;
+// }
+Motor FlowerRotation::_motor = Motor(delayBetweenStep,pin1,pin2,pin3,pin4);
 float FlowerRotation::currentPosition = 0;
+int FlowerRotation::delayBetweenStep = 0;
+int FlowerRotation::pin1 = 0;
+int FlowerRotation::pin2 = 0;
+int FlowerRotation::pin3 = 0;
+int FlowerRotation::pin4 = 0;
