@@ -11,9 +11,7 @@ class FlowerRotation {
   public:
     FlowerRotation(int* average);
     FlowerRotation(){};
-    ~FlowerRotation(){
-      //delete _reading;
-    };
+    ~FlowerRotation();
     void adjustFlower();
     void rotate();
     void update();

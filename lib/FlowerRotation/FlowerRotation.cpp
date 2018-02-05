@@ -16,7 +16,10 @@ using namespace InitFlower;
 FlowerRotation::FlowerRotation(int* averages){
   _reading = new Reading(averages);
 }
-
+FlowerRotation::~FlowerRotation(){
+   delete _reading;
+   delete _motor;
+}
 void FlowerRotation::SETUP_MOTOR(int delayBetweenStep,int pin1,
   int pin2,int pin3, int pin4){
   _motor = new Motor(delayBetweenStep,pin1,pin2,pin3,pin4);
@@ -54,8 +57,8 @@ void FlowerRotation::update(){
     }
   }
   currentPosition = newPosition;
-  delete _reading;
-  _reading = nullptr;
+  // delete _reading;
+  // _reading = nullptr;
 }
 
 float FlowerRotation::angle_steps(float angle){
