@@ -27,14 +27,13 @@ void setup(){
   for(int i=2; i<7; i++){
     pinMode(i,OUTPUT);
   }
-  FlowerRotation::SETUP_MOTOR(STEP_DELAY,A_1,A_2,B_1,B_2);
+  fr.SETUP_MOTOR(STEP_DELAY,A_1,A_2,B_1,B_2);
   flowerSet = false;
   delay(5);
 }
 
 void loop(){
   //check flowerSet if false initFlower else FlowerRotation
-
   while(!flowerSet){
     if(mappedReading((analogRead(initSensor))) < 25){
       Serial.println("setting flower...");
@@ -58,7 +57,7 @@ void loop(){
  //     // ledFollow(Reading.returnTopThree()[0],
  //     //  Reading.returnTopThree()[1]);
     }
-  FlowerRotation fr(averages);
+  fr = FlowerRotation(averages);
   fr.update();
   delay(10000);
 }

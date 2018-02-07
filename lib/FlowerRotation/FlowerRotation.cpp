@@ -21,11 +21,7 @@ FlowerRotation::~FlowerRotation(){
 }
 void FlowerRotation::SETUP_MOTOR(int del,int p1,
   int p2,int p3, int p4){
-  delayBetweenStep = del;
-  pin1 = p1;
-  pin2 = p2;
-  pin3 = p3;
-  pin4 = p4;
+  _motor = Motor(del,p1,p2,p3,p4);
 }
 void FlowerRotation::setFlower(){
   SETUP(_motor);  //InitFlower
@@ -128,10 +124,4 @@ void FlowerRotation::rotate(){
 //   Motor m = Motor(_motor.getPin1(),_motor.getPin2(),_motor.getPin3(),_motor.getPin4());
 //   return m;
 // }
-Motor FlowerRotation::_motor = Motor(delayBetweenStep,pin1,pin2,pin3,pin4);
 float FlowerRotation::currentPosition = 0;
-int FlowerRotation::delayBetweenStep = 0;
-int FlowerRotation::pin1 = 0;
-int FlowerRotation::pin2 = 0;
-int FlowerRotation::pin3 = 0;
-int FlowerRotation::pin4 = 0;
