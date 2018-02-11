@@ -18,6 +18,9 @@ int Reading::getFirstSensor(){
 int Reading::getSecondSensor(){
 	return _topThree[1];
 }
+int Reading::getTops(int i){
+	return _topThree[i];
+}
 
 void Reading::getTopThree() {
   int tempHighest = 3;

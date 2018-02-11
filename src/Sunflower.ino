@@ -19,7 +19,7 @@ FlowerRotation fr;
 const int READING_INTERVAL = 10000;
 const int COMPARE_INTERVAL = 20000;
 int sensors[4][10];
-int averages[4];
+int *averages;
 
 void setup(){
   Serial.begin(9600);
@@ -59,7 +59,7 @@ void loop(){
     }
   fr = FlowerRotation(averages);
   fr.update();
-  delay(10000);
+  delay(6000);
 }
 
 void popSensor(){

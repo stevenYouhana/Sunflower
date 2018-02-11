@@ -17,13 +17,13 @@ class FlowerRotation {
     void update();
     float angle_steps(float angle);
     int getTopSensorAngle(int topSensor);
-    static Motor getMotor();
     void SETUP_MOTOR(int delayBetweenStep,int pin1,
       int pin2,int pin3, int pin4);
     void setFlower();
   private:
     Reading* _reading = nullptr;
-    static Motor _motor;
+    Motor _motor;
+    Motor *localMotor;
     int delayBetweenStep;
     int pin1;
     int pin2;

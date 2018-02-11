@@ -4,7 +4,12 @@
 #include "Arduino.h"
 #include "Motor.h"
 
-namespace InitFlower{
-  void SETUP(Motor m);
-}
+class InitFlower{
+  public:
+    InitFlower();
+    ~InitFlower();
+    void SETUP(Motor m);
+  private:
+    Motor *localMotor;
+};
 #endif

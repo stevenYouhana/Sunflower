@@ -13,8 +13,9 @@ class Reading{
 		int getFirstSensor();
 		int getSecondSensor();
 		void getTopThree();
+		int getTops(int);
 	private:
-		int*  _averages = nullptr;
+		int*  _averages;
 		int _topThree[6];	//[6]?
 };
 #endif

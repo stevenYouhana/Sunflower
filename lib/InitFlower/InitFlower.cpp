@@ -1,9 +1,17 @@
 #include "Arduino.h"
 #include "Motor.h"
 #include "InitFlower.h"
-using namespace InitFlower;
 
+InitFlower::InitFlower(){
+  localMotor = new Motor();
+}
+
+InitFlower::~InitFlower(){
+  delete localMotor;
+}
 void InitFlower::SETUP(Motor m){
-  m.setDelayBetweenSteps(15);
-  m.toSetup_LED();
+  *localMotor = m;
+  localMotor->setDelayBetweenSteps(15);
+  localMotor->toSetup_LED();
+
 }
