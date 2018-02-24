@@ -1,5 +1,6 @@
 #include "Arduino.h"
 #include "Reading.h"
+
 //CLASS RENAMED FROM ReadingLogic to Reading
 Reading::Reading(int* _averages) {
 	this-> _averages = _averages;
@@ -62,9 +63,10 @@ void Reading::getTopThree() {
   // If not adjacent, take the third highest
   if ((_topThree[0] == 0 && _topThree[1] == 2 ) || (_topThree[0] == 1 && _topThree[1] == 3) || (_topThree[0] == 2 && _topThree[1] == 0) || (_topThree[0] == 3 && _topThree[1] == 1)) {
       _topThree[1] = _topThree[2];
-  }// Serial.print("first highest: "); Serial.println(_topThree[3]); Serial.print("second highest: "); Serial.println(_topThree[4]);
+  }
+
 	for(int i=0; i<6; i++){
-		Serial.print(i);Serial.print("AVERAGES:    ");
+		Serial.print("_topThree: at index ");Serial.print(i);Serial.print(" is: ");
 		Serial.println(_topThree[i]);
 	}
 }
