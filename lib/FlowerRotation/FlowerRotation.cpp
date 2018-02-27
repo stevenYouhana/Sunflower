@@ -12,7 +12,7 @@ using::asin;
 //This class will need to use both Reading and Motor classes for flower rotation
 //This class will be use in .ino (main)
 
-FlowerRotation::FlowerRotation(int* averages){
+FlowerRotation::FlowerRotation(float averages[4]){
   _reading = new Reading(averages);
 }
 FlowerRotation::~FlowerRotation(){
@@ -38,7 +38,7 @@ void FlowerRotation::setFlower(){
 
 void FlowerRotation::update(){
   localMotor = new Motor(delayBetweenStep,pin1,pin2,pin3,pin4);
-  for(int i=0; i<6; i++){
+  for(int i=0; i<3; i++){
     Serial.print("\nFR/getTops: ");
     Serial.println(_reading->getTops(i));
   }

@@ -9,7 +9,7 @@
 */
 class FlowerRotation {
   public:
-    FlowerRotation(int* average);
+    FlowerRotation(float averages[4]);
     FlowerRotation(){};
     ~FlowerRotation();
     void adjustFlower();

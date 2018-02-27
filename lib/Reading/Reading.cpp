@@ -1,25 +1,27 @@
 #include "Arduino.h"
 #include "Reading.h"
 //CLASS RENAMED FROM ReadingLogic to Reading
-Reading::Reading(int* _averages) {
-	this-> _averages = _averages;
+Reading::Reading(float averages[4]) {
+	for (int i = 0; i < 4; i++) {
+		_averages[i] = averages[i];
+	}
 	getTopThree();
 }
 Reading::Reading(){};
-int Reading::getFirstValue(){
-	return _topThree[3];
+float Reading::getFirstValue(){
+	return _topThreeValues[0];
 }
-int Reading::getSecondValue(){
-	return _topThree[4];
+float Reading::getSecondValue(){
+	return _topThreeValues[1];
 }
 int Reading::getFirstSensor(){
-	return _topThree[0];
+	return _topThreeIndices[0];
 }
 int Reading::getSecondSensor(){
-	return _topThree[1];
+	return _topThreeIndices[1];
 }
-int Reading::getTops(int i){
-	return _topThree[i];
+float Reading::getTops(int i){
+	return _topThreeValues[i];
 }
 
 void Reading::getTopThree() {
@@ -27,44 +29,50 @@ void Reading::getTopThree() {
   int tempSecond = 2;
   int tempThird = 1;
 	/*
-   Reference for _averagesay _topThree[6] :
-  * _topThree[0]: Index of highest average
-  * _topThree[1]: Index of second highest average
-  * _topThree[2]: Index of third highest average
-  * _topThree[3]: Value of highest average
-  * _topThree[4]: Value of second highest average
-  * _topThree[5]: Value of third highest average
-*/
-  for (int i = 0; i < 4; i++) {
-      if (_averages[i] >= tempThird) {
-          tempThird = _averages[i];
-          _topThree[2] = i;
-          _topThree[5] = _averages[i];
-      }
-      if (_averages[i] >= tempSecond) {
-          tempThird = tempSecond;
-          _topThree[2] = _topThree[1];
-          _topThree[5] = tempThird;
-          tempSecond = _averages[i];
-          _topThree[1] = i;
-          _topThree[4] = _averages[i];
-      }
-      if (_averages[i] >= tempHighest) {
-          tempSecond = tempHighest;
-          _topThree[1] = _topThree[0];
-          _topThree[4] = tempSecond;
-          tempHighest = _averages[i];
-          _topThree[0] = i;
-          _topThree[3] = _averages[i];
-			}
+	   Reference for _averagesay _topThree[6] :
+	  * _topThreeIndices[0]: Index of highest average
+	  * _topThreeIndices[1]: Index of second highest average
+	  * _topThreeIndices[2]: Index of third highest average
+	  * _topThreeValues[0]: Value of highest average
+	  * _topThreeValues[1]: Value of second highest average
+	  * _topThreeValues[2]: Value of third highest average
+	*/
+	  for (int i = 0; i < 4; i++) {
+	      if (_averages[i] >= tempThird) {
+	          tempThird = _averages[i];
+	          _topThreeIndices[2] = i;
+	          _topThreeValues[2] = _averages[i];
+	      }
+	      if (_averages[i] >= tempSecond) {
+	          tempThird = tempSecond;
+	          _topThreeIndices[2] = _topThreeIndices[1];
+	          _topThreeValues[2] = tempThird;
+	          tempSecond = _averages[i];
+	          _topThreeIndices[1] = i;
+	          _topThreeValues[1] = _averages[i];
+	      }
+	      if (_averages[i] >= tempHighest) {
+	          tempSecond = tempHighest;
+	          _topThreeIndices[1] = _topThreeIndices[0];
+	          _topThreeValues[1] = tempSecond;
+	          tempHighest = _averages[i];
+	          _topThreeIndices[0] = i;
+	          _topThreeValues[0] = _averages[i];
+	            }
+	  }
+	  // Check if _topThreeIndices two readings are from adjacent sensors
+	  // If not adjacent, take the third highest
+	  if ((_topThreeIndices[0] == 0 && _topThreeIndices[1] == 2 ) || (_topThreeIndices[0] == 1 && _topThreeIndices[1] == 3) || (_topThreeIndices[0] == 2 && _topThreeIndices[1] == 0) || (_topThreeIndices[0] == 3 && _topThreeIndices[1] == 1)) {
+	      _topThreeIndices[1] = _topThreeIndices[2];
+	  }
+
+	for(int i=0; i<3; i++){
+    Serial.print("_topThreeIndices: at index ");Serial.print(i);Serial.print(" is: ");
+    Serial.println(_topThreeIndices[i]);
   }
-  // Check if _topThree two readings are from adjacent sensors
-  // If not adjacent, take the third highest
-  if ((_topThree[0] == 0 && _topThree[1] == 2 ) || (_topThree[0] == 1 && _topThree[1] == 3) || (_topThree[0] == 2 && _topThree[1] == 0) || (_topThree[0] == 3 && _topThree[1] == 1)) {
-      _topThree[1] = _topThree[2];
-  }// Serial.print("first highest: "); Serial.println(_topThree[3]); Serial.print("second highest: "); Serial.println(_topThree[4]);
-	for(int i=0; i<6; i++){
-		Serial.print(i);Serial.print("AVERAGES:    ");
-		Serial.println(_topThree[i]);
-	}
+
+  for(int i=0; i<3; i++){
+    Serial.print("_topThreeValues: at index ");Serial.print(i);Serial.print(" is: ");
+    Serial.println(_topThreeValues[i]);
+  }
 }

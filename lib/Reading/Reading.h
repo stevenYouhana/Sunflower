@@ -5,17 +5,19 @@
 //Class RENAMED FROM ReadingLogic to Reading
 class Reading{
 	public:
-		Reading(int* averages);
+		Reading(float averages[4]);
     Reading();
     ~Reading(){};
-		int getFirstValue();
-		int getSecondValue();
+		float getFirstValue();
+		float getSecondValue();
 		int getFirstSensor();
 		int getSecondSensor();
 		void getTopThree();
-		int getTops(int);
+		float getTops(int);
 	private:
-		int*  _averages;
-		int _topThree[6];	//[6]?
+		float  _averages[4];
+		float _topThreeValues[3];
+		int _topThreeIndices[3];
+		// int _topThree[6];	//[6]?
 };
 #endif

@@ -19,7 +19,7 @@ FlowerRotation fr;
 const int READING_INTERVAL = 10000;
 const int COMPARE_INTERVAL = 20000;
 int sensors[4][10];
-int *averages;
+float averages[4];
 
 void setup(){
   Serial.begin(9600);
@@ -49,14 +49,14 @@ void loop(){
   Serial.println(mappedReading(analogRead(initSensor)));
   //Normal opperation
   popSensor();
-   //ADD AVS TO AVERAGES
-   for(int i=0; i<4; i++){
+  //ADD AVS TO AVERAGES
+  for(int i=0; i<4; i++) {
     averages[i] = getAverage(sensors[i]);
     // Serial.print("av:   ");
     // Serial.println(averages[i]);
- //     // ledFollow(Reading.returnTopThree()[0],
- //     //  Reading.returnTopThree()[1]);
-    }
+    //     // ledFollow(Reading.returnTopThree()[0],
+    //     //  Reading.returnTopThree()[1]);
+  }
   fr = FlowerRotation(averages);
   fr.update();
   delay(6000);
@@ -65,17 +65,18 @@ void loop(){
 void popSensor(){
   for(int s=0; s<4; s++){
     for(int r=0; r<10; r++){
+      // FIX THIS?
       sensors[s][r] = mappedReading(analogRead(s));
     }
   }
 }
 
-int getAverage(int sensor[10]){
-  int average = 0;
+float getAverage(int sensor[10]){
+  int total = 0;
   for(int i=0; i<10; i++){
-    average += sensor[i];
+    total += sensor[i];
   }
-  return average/10;
+  return total/10;
 }
 //MAPPING TO 100
 int mappedReading(int reading){
