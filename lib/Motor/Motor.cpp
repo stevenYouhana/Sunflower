@@ -6,8 +6,8 @@ This Motor has a Gear ratio of 64, and Stride Angle 5.625° so this motor has 40
  steps= (360°/5.625°)*64"Gear ratio" = 64 * 64 =4096
  */
  //This is class will be used in .ino (main) only to for setup
-Motor::Motor(int delayBetweenStep,int pin1,
-  int pin2,int pin3, int pin4){
+Motor::Motor(int delayBetweenStep, byte pin1,
+  byte pin2, byte pin3, byte pin4){
   _delayBetweenStep = delayBetweenStep;
   _pin1 = pin1;
   _pin2 = pin2;
@@ -18,7 +18,7 @@ Motor::Motor(int delayBetweenStep,int pin1,
     _delayBetweenStep = 1;
   }
 }
-Motor::Motor(int pin1,int pin2,int pin3, int pin4){
+Motor::Motor(byte pin1, byte pin2, byte pin3, byte pin4){
   _pin1 = pin1;
   _pin2 = pin2;
   _pin3 = pin3;
@@ -155,15 +155,15 @@ int Motor::getDelayBetweenSteps(){
 void Motor::setDelayBetweenSteps(int i){
   _delayBetweenStep = i;
 }
-int Motor::getPin1(){
+byte Motor::getPin1(){
   return _pin1;
 }
-int Motor::getPin2(){
+byte Motor::getPin2(){
   return _pin2;
 }
-int Motor::getPin3(){
+byte Motor::getPin3(){
   return _pin3;
 }
-int Motor::getPin4(){
+byte Motor::getPin4(){
   return _pin4;
 }

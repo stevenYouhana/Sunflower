@@ -6,9 +6,9 @@
 
 class Motor {
   public:
-    Motor(int delayBetweenStep,int pin1,
-  int pin2,int pin3, int pin4);
-    Motor(int pin1,int pin2,int pin3, int pin4);
+    Motor(int delayBetweenStep,byte pin1,
+  byte pin2, byte pin3, byte pin4);
+    Motor(byte pin1, byte pin2, byte pin3, byte pin4);
     Motor(){};
     void toAngleClockwise(int angle);
     void toAngleUnticlockwise(int steps);
@@ -18,16 +18,16 @@ class Motor {
     void kill();
     int getDelayBetweenSteps();
     void setDelayBetweenSteps(int i);
-    int getPin1();
-    int getPin2();
-    int getPin3();
-    int getPin4();
+    byte getPin1();
+    byte getPin2();
+    byte getPin3();
+    byte getPin4();
   private:
     int _delayBetweenStep;
-    int _pin1 = 0;
-    int _pin2 = 0;
-    int _pin3 = 0;
-    int _pin4 = 0;
+    byte _pin1 = 0;
+    byte _pin2 = 0;
+    byte _pin3 = 0;
+    byte _pin4 = 0;
     int _stepCounter = 0;
     void _abstractRotation(int step);
 };
