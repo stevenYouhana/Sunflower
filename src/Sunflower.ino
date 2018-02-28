@@ -6,12 +6,12 @@ int led3 = 4;
 int led4 = 5;
 
 //MOTOR VARS
-const int A_1 = 8;
-const int A_2= 9;
-const int B_1 = 10;
-const int B_2 = 11;
+const byte A_1 = 8;
+const byte A_2= 9;
+const byte B_1 = 10;
+const byte B_2 = 11;
 const int STEP_DELAY = 1;
-const int initSensor = A5;
+const byte initSensor = A5;
 
 bool flowerSet;
 FlowerRotation fr;
@@ -34,43 +34,46 @@ void setup(){
 
 void loop(){
   //check flowerSet if false initFlower else FlowerRotation
-  while(!flowerSet){
-    if(mappedReading((analogRead(initSensor))) < 25){
-      Serial.println("setting flower...");
-      Serial.println(mappedReading(analogRead(initSensor)));
-      fr.setFlower();
-    }
-    else{
-      flowerSet = true;
-      break;
-    }
-  }
+  // while(!flowerSet){
+  //   if(mappedReading((analogRead(initSensor))) < 25){
+  //     Serial.println("setting flower...");
+  //     Serial.println(mappedReading(analogRead(initSensor)));
+  //     fr.setFlower();
+  //   }
+  //   else{
+  //     flowerSet = true;
+  //     break;
+  //   }
+  // }
   Serial.println("Normal operation...");
-  Serial.println(mappedReading(analogRead(initSensor)));
+  //Serial.println(mappedReading(analogRead(initSensor)));
   //Normal opperation
   popSensor();
   //ADD AVS TO AVERAGES
-  for(int i=0; i<4; i++) {
+  for(int i=0; i<4; i++){
     averages[i] = getAverage(sensors[i]);
-    // Serial.print("av:   ");
-    // Serial.println(averages[i]);
-    //     // ledFollow(Reading.returnTopThree()[0],
-    //     //  Reading.returnTopThree()[1]);
   }
   fr = FlowerRotation(averages);
   fr.update();
-  delay(6000);
+  delay(3000);
 }
-
+inline byte getAnalogPins(int i){
+  switch(i){
+    case 1: return A1; break;
+    case 2: return A2; break;
+    case 3: return A3; break;
+    default: return A0; break;
+  }
+}
 void popSensor(){
   for(int s=0; s<4; s++){
+    //INSERT DELAY FOR READINGS
     for(int r=0; r<10; r++){
-      // FIX THIS?
-      sensors[s][r] = mappedReading(analogRead(s));
+      sensors[s][r] = mappedReading(analogRead(
+        getAnalogPins(s)));
     }
   }
 }
-
 float getAverage(int sensor[10]){
   int total = 0;
   for(int i=0; i<10; i++){

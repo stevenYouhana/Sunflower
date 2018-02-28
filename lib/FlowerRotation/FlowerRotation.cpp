@@ -16,9 +16,7 @@ FlowerRotation::FlowerRotation(float averages[4]){
   _reading = new Reading(averages);
 }
 FlowerRotation::~FlowerRotation(){
-
    delete localMotor;
-   //_reading = nullptr;
    localMotor = nullptr;
 }
 void FlowerRotation::SETUP_MOTOR(int del,int p1,
@@ -82,16 +80,16 @@ float FlowerRotation::angle_steps(float angle){
 int FlowerRotation::getTopSensorAngle(int topSensor) {
   int ANGLE_TOP_SENSOR = 0;
   switch (topSensor) {
-    case 1: Serial.println(" switch TOP_SENSOR: 1");
+    case 1: //Serial.println(" switch TOP_SENSOR: 1");
       ANGLE_TOP_SENSOR = 90;
       break;
-    case 2: Serial.println("switch TOP_SENSOR: 2");
+    case 2: //Serial.println("switch TOP_SENSOR: 2");
       ANGLE_TOP_SENSOR = 180;
       break;
-    case 3: Serial.println("switch TOP_SENSOR: 3");
+    case 3: //Serial.println("switch TOP_SENSOR: 3");
       ANGLE_TOP_SENSOR = 270;
       break;
-    default: Serial.println("switch TOP_SENSOR: 0");
+    default: //Serial.println("switch TOP_SENSOR: 0");
       ANGLE_TOP_SENSOR = 0;
   }
   //Serial.print("ANGLE_TOP_SENSOR: "); Serial.println(ANGLE_TOP_SENSOR);

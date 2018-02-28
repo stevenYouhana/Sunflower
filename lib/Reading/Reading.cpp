@@ -1,9 +1,9 @@
 #include "Arduino.h"
 #include "Reading.h"
 //CLASS RENAMED FROM ReadingLogic to Reading
-Reading::Reading(float averages[4]) {
+Reading::Reading(float _averages[4]) {
 	for (int i = 0; i < 4; i++) {
-		_averages[i] = averages[i];
+		this-> _averages[i] = _averages[i];
 	}
 	getTopThree();
 }
