@@ -34,17 +34,17 @@ void setup(){
 
 void loop(){
   //check flowerSet if false initFlower else FlowerRotation
-  // while(!flowerSet){
-  //   if(mappedReading((analogRead(initSensor))) < 25){
-  //     Serial.println("setting flower...");
-  //     Serial.println(mappedReading(analogRead(initSensor)));
-  //     fr.setFlower();
-  //   }
-  //   else{
-  //     flowerSet = true;
-  //     break;
-  //   }
-  // }
+  while(!flowerSet){
+    if(mappedReading((analogRead(initSensor))) < 25){
+      Serial.println("setting flower...");
+      Serial.println(mappedReading(analogRead(initSensor)));
+      fr.setFlower();
+    }
+    else{
+      flowerSet = true;
+      break;
+    }
+  }
   Serial.println("Normal operation...");
   //Serial.println(mappedReading(analogRead(initSensor)));
   //Normal opperation
