@@ -11,7 +11,7 @@ using::asin;
 BigPicture::BigPicture(){};
 BigPicture::~BigPicture(){}
 
-//update is only telling the motor what to do
+
 void BigPicture::update(){	
   rotationAngle(firstValue, secondValue, firstSensor, secondSensor);
   if(newPosition < currentPosition){
@@ -73,7 +73,7 @@ int BigPicture::getTopSensorAngle(int topSensor){
     case 3:
       ANGLE_TOP_SENSOR = 270;
       break;
-    default: //Serial.println("switch TOP_SENSOR: 0");
+    default:
       ANGLE_TOP_SENSOR = 0;
   }
   return ANGLE_TOP_SENSOR;

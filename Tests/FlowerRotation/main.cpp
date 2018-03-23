@@ -1,5 +1,6 @@
 #include <iostream>
 #include "BigPicture.h"
+
 using std::endl;
 using std::cout;
 using std::string;
