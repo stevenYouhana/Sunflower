@@ -1,4 +1,5 @@
 #include "FlowerRotation.h"
+#include "TestReading.h"
 
 int led1 = 2;
 int led2 = 3;
@@ -14,26 +15,34 @@ const int STEP_DELAY = 1;
 const byte initSensor = A5;
 
 bool flowerSet;
-FlowerRotation fr;
 
 const int READING_INTERVAL = 10000;
 const int COMPARE_INTERVAL = 20000;
 int sensors[4][10];
 float averages[4];
 
+FlowerRotation fr;
+// Testing
+TestReading tr;
+
 void setup(){
   Serial.begin(9600);
   Serial.println("start...");
-  for(int i=2; i<7; i++){
-    pinMode(i,OUTPUT);
-  }
-  fr.SETUP_MOTOR(STEP_DELAY,A_1,A_2,B_1,B_2);
-  flowerSet = false;
+  // for(int i=2; i<7; i++){
+  //   pinMode(i,OUTPUT);
+  // }
+  // fr.SETUP_MOTOR(STEP_DELAY,A_1,A_2,B_1,B_2);
+  // flowerSet = false;
   delay(5);
 }
 
 void loop(){
+  tr = TestReading();
+  tr.getTotallyFakeFirstValue();
+  tr.getTotallyFakeSecondSensor();
+  
   //check flowerSet if false initFlower else FlowerRotation
+<<<<<<< HEAD
   while(!flowerSet){
     if(mappedReading((analogRead(initSensor))) < 25){
       Serial.println("setting flower...");
@@ -64,6 +73,35 @@ inline byte getAnalogPins(int i){
     case 3: return A3; break;
     default: return A0; break;
   }
+=======
+  // while(!flowerSet){
+  //   if(mappedReading((analogRead(initSensor))) < 25){
+  //     Serial.println("setting flower...");
+  //     Serial.println(mappedReading(analogRead(initSensor)));
+  //     fr.setFlower();
+  //   }
+  //   else{
+  //     flowerSet = true;
+  //     break;
+  //   }
+  // }
+  // Serial.println("Normal operation...");
+  // Serial.println(mappedReading(analogRead(initSensor)));
+  // //Normal opperation
+  // popSensor();
+  //  //ADD AVS TO AVERAGES
+  //  for(int i=0; i<4; i++){
+  //   averages[i] = getAverage(sensors[i]);
+  //   Serial.print("av:   ");
+  //   Serial.println(averages[i]);
+  //    // ledFollow(Reading.returnTopThree()[0],
+  //    //  Reading.returnTopThree()[1]);
+  //   }
+  //
+  // fr = FlowerRotation(averages);
+  // fr.update();
+  delay(6000);
+>>>>>>> origin/test-reading
 }
 void popSensor(){
   for(int s=0; s<4; s++){
