@@ -1,11 +1,16 @@
 #include "FlowerRotation.h"
 #include "TestReading.h"
 
+//test leds
 int led1 = 2;
 int led2 = 3;
 int led3 = 4;
 int led4 = 5;
 
+//Placement compass; using Keyes KY 024 Hall Sensor for table placement
+const byte KY024 = A1;
+int KY024_reader;
+const int NORTH = 0;  //FIX
 //MOTOR VARS
 const byte A_1 = 8;
 const byte A_2= 9;
@@ -26,6 +31,7 @@ FlowerRotation fr;
 TestReading tr;
 
 void setup(){
+  KY024 = 0;
   Serial.begin(9600);
   Serial.println("start...");
   // for(int i=2; i<7; i++){
@@ -40,7 +46,10 @@ void loop(){
   tr = TestReading();
   tr.getTotallyFakeFirstValue();
   tr.getTotallyFakeSecondSensor();
-  
+  //Placement
+  if(analogRead(KY024) >= NORTH) {
+    digitalWrite(NORTH_LED,HIGH);
+  }
   //check flowerSet if false initFlower else FlowerRotation
 <<<<<<< HEAD
   while(!flowerSet){
