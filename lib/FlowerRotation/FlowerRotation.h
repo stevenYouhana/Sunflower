@@ -1,9 +1,12 @@
 #ifndef FlowerRotation_h
 #define FlowerRotation_h
 
-#include "Arduino.h"
+
 #include "Reading.h"
 #include "Motor.h"
+#include <trig_lib.h>
+//#include <cmath>
+#include "Arduino.h"
 /*This class uses <Reading> to use the sensor data
   for rotating the flower in the appropriate angle
 */

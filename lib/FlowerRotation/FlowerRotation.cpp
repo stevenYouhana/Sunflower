@@ -2,9 +2,9 @@
 #include "InitFlower.h"
 #include "Reading.h"
 #include "Motor.h"
-#include "Arduino.h"
+#include <trig_lib.h>
 #include <cmath>
-
+#include "Arduino.h"
 using::pow;
 using::sqrt;
 using::asin;

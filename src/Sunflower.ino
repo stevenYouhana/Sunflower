@@ -1,4 +1,5 @@
 #include "FlowerRotation.h"
+#include "Log.h"
 
 int led1 = 2;
 int led2 = 3;
@@ -21,6 +22,7 @@ const int COMPARE_INTERVAL = 20000;
 int sensors[4][10];
 float averages[4];
 
+Log l;
 void setup(){
   Serial.begin(9600);
   Serial.println("start...");
@@ -30,6 +32,7 @@ void setup(){
   fr.SETUP_MOTOR(STEP_DELAY,A_1,A_2,B_1,B_2);
   flowerSet = false;
   delay(5);
+  //l.log("Logging...");
 }
 
 void loop(){
