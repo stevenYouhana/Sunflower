@@ -63,30 +63,21 @@ void Reading::getTopThree() {
 	  }
 	  // Check if _topThreeIndices two readings are from adjacent sensors
 	  // If not adjacent, take the third highest
-	  if ((_topThreeIndices[0] == 0 && _topThreeIndices[1] == 2 ) || (_topThreeIndices[0] == 1 && _topThreeIndices[1] == 3) || (_topThreeIndices[0] == 2 && _topThreeIndices[1] == 0) || (_topThreeIndices[0] == 3 && _topThreeIndices[1] == 1)) {
+	  if ((_topThreeIndices[0] == 0 && _topThreeIndices[1] == 2 ) ||
+		 (_topThreeIndices[0] == 1 && _topThreeIndices[1] == 3) ||
+		  (_topThreeIndices[0] == 2 && _topThreeIndices[1] == 0) ||
+			 (_topThreeIndices[0] == 3 && _topThreeIndices[1] == 1)) {
 	      _topThreeIndices[1] = _topThreeIndices[2];
 	  }
 
-	for(int i=0; i<3; i++){
-    Serial.print("_topThreeIndices: at index ");Serial.print(i);Serial.print(" is: ");
-    Serial.println(_topThreeIndices[i]);
-  }
+	// for(int i=0; i<3; i++){
+  //   Serial.print("_topThreeIndices: at index ");Serial.print(i);Serial.print(" is: ");
+  //   Serial.println(_topThreeIndices[i]);
+  // }
+	//
+  // for(int i=0; i<3; i++){
+  //   Serial.print("_topThreeValues: at index ");Serial.print(i);Serial.print(" is: ");
+  //   Serial.println(_topThreeValues[i]);
+  // }
 
-  for(int i=0; i<3; i++){
-    Serial.print("_topThreeValues: at index ");Serial.print(i);Serial.print(" is: ");
-    Serial.println(_topThreeValues[i]);
-  }
-<<<<<<< HEAD
-=======
-  // Check if _topThree two readings are from adjacent sensors
-  // If not adjacent, take the third highest
-  if ((_topThree[0] == 0 && _topThree[1] == 2 ) || (_topThree[0] == 1 && _topThree[1] == 3) || (_topThree[0] == 2 && _topThree[1] == 0) || (_topThree[0] == 3 && _topThree[1] == 1)) {
-      _topThree[1] = _topThree[2];
-  }
-
-	for(int i=0; i<6; i++){
-		Serial.print("_topThree: at index ");Serial.print(i);Serial.print(" is: ");
-		Serial.println(_topThree[i]);
-	}
->>>>>>> origin/test-reading
 }

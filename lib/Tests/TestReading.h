@@ -7,7 +7,7 @@ class TestReading {
   public:
     TestReading();
     ~TestReading();
-    int totallyFakeAverages[4] = { 40, 20, 80, 120 };
+    float totallyFakeAverages[4] = { 40.4, 20.5, 80.2, 120.2 };
     void getTotallyFakeFirstValue();
     void getTotallyFakeSecondSensor();
   private:
