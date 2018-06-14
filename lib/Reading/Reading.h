@@ -18,6 +18,5 @@ class Reading{
 		float  _averages[4];
 		float _topThreeValues[3];
 		int _topThreeIndices[3];
-		// int _topThree[6];	//[6]?
 };
 #endif

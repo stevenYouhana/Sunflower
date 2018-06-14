@@ -85,8 +85,8 @@ void Motor::_abstractRotation(int step){
       break;
   }
 }
+
 void Motor::toAngleUnticlockwise(int steps){
-  Serial.print("STEPS: ");Serial.println(steps);
   while(_stepCounter <= steps){
     for(int i=0; i<8; i++){
       _abstractRotation(i);
@@ -97,7 +97,6 @@ void Motor::toAngleUnticlockwise(int steps){
   kill();
 }
 void Motor::toAngleClockwise(int steps){
-  Serial.print("STEPS: ");Serial.println(steps);
   while (_stepCounter <= steps) {
     for(int i=7; i>=0; i--){
       _abstractRotation(i);

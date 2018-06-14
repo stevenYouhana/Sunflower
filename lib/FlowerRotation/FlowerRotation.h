@@ -21,7 +21,7 @@ class FlowerRotation {
       int pin2,int pin3, int pin4);
     void setFlower();
   private:
-    Reading* _reading = nullptr;
+    Reading* _reading;
     Motor _motor;
     Motor *localMotor;
     int delayBetweenStep;
@@ -32,7 +32,7 @@ class FlowerRotation {
     void rotationAngle(int top, int second, int topSensor, int secondSensor);
     float radToDeg(float angle);
     float map90_1024(float angle);
-    static float currentPosition;
-    float newPosition = 0;
+    float currentPosition;
+    float newPosition;
 };
 #endif

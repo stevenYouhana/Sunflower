@@ -1,5 +1,6 @@
 #include "Arduino.h"
 #include "Reading.h"
+
 //CLASS RENAMED FROM ReadingLogic to Reading
 Reading::Reading(float _averages[4]) {
 	for (int i = 0; i < 4; i++) {
@@ -62,17 +63,21 @@ void Reading::getTopThree() {
 	  }
 	  // Check if _topThreeIndices two readings are from adjacent sensors
 	  // If not adjacent, take the third highest
-	  if ((_topThreeIndices[0] == 0 && _topThreeIndices[1] == 2 ) || (_topThreeIndices[0] == 1 && _topThreeIndices[1] == 3) || (_topThreeIndices[0] == 2 && _topThreeIndices[1] == 0) || (_topThreeIndices[0] == 3 && _topThreeIndices[1] == 1)) {
+	  if ((_topThreeIndices[0] == 0 && _topThreeIndices[1] == 2 ) ||
+		 (_topThreeIndices[0] == 1 && _topThreeIndices[1] == 3) ||
+		  (_topThreeIndices[0] == 2 && _topThreeIndices[1] == 0) ||
+			 (_topThreeIndices[0] == 3 && _topThreeIndices[1] == 1)) {
 	      _topThreeIndices[1] = _topThreeIndices[2];
 	  }
 
-	for(int i=0; i<3; i++){
-    Serial.print("_topThreeIndices: at index ");Serial.print(i);Serial.print(" is: ");
-    Serial.println(_topThreeIndices[i]);
-  }
+	// for(int i=0; i<3; i++){
+  //   Serial.print("_topThreeIndices: at index ");Serial.print(i);Serial.print(" is: ");
+  //   Serial.println(_topThreeIndices[i]);
+  // }
+	//
+  // for(int i=0; i<3; i++){
+  //   Serial.print("_topThreeValues: at index ");Serial.print(i);Serial.print(" is: ");
+  //   Serial.println(_topThreeValues[i]);
+  // }
 
-  for(int i=0; i<3; i++){
-    Serial.print("_topThreeValues: at index ");Serial.print(i);Serial.print(" is: ");
-    Serial.println(_topThreeValues[i]);
-  }
 }

@@ -12,12 +12,13 @@ using::asin;
 //This class will need to use both Reading and Motor classes for flower rotation
 //This class will be use in .ino (main)
 
-FlowerRotation::FlowerRotation(float averages[4]){
-  _reading = new Reading(averages);
+FlowerRotation::FlowerRotation(float averages[4]) :
+  _reading(new Reading(averages)),  currentPosition(0.0),newPosition(0.0)
+{
+
 }
 FlowerRotation::~FlowerRotation(){
    delete localMotor;
-   localMotor = nullptr;
 }
 void FlowerRotation::SETUP_MOTOR(int del,int p1,
   int p2,int p3, int p4){
@@ -33,6 +34,31 @@ void FlowerRotation::setFlower(){
   init.SETUP(_motor);  //InitFlower
 }
 //------------------Logic------------------
+void FlowerRotation::rotationAngle(int top, int second, int topSensor, int secondSensor){
+  float MINOR_ADJUSTMENT = 0;
+
+  if(((top<=100) & (top>=0)) & ((second<=100) & (second>=0))){
+    const int LEG_A_BIG_TRIANGLE = 10; //Random, can totally be changed
+    const int LEG_B_BIG_TRIANGLE = 10;
+    const float HYPOTENUSE_BIG_TRIANGLE = sqrt(pow(LEG_A_BIG_TRIANGLE, 2) + pow(LEG_B_BIG_TRIANGLE, 2));
+    float LEG_A_SMALL_TRIANGLE = HYPOTENUSE_BIG_TRIANGLE / 2;
+    float DIFF_PERCENTAGE = top - second; //since the mapped sensor value is to 100 so we can use as %
+    float LEG_A_SMALLER_TRIANGLE = (LEG_A_SMALL_TRIANGLE / 100) * DIFF_PERCENTAGE;
+    float HYPOTENUSE_SMALLER_TRIANGLE = sqrt(pow(LEG_A_SMALL_TRIANGLE, 2) + pow(LEG_A_SMALLER_TRIANGLE, 2));
+    // Angle refers to the angle of rotation from the midpoint of Top Sensor and Second Sensor
+    // This angle is in radians
+    MINOR_ADJUSTMENT = radToDeg(asin(LEG_A_SMALLER_TRIANGLE / HYPOTENUSE_SMALLER_TRIANGLE));
+  }
+  Serial.print("\ntopSensor: "); Serial.println(getTopSensorAngle(topSensor));
+  Serial.print("\nMINOR_ADJUSTMENT: "); Serial.println(MINOR_ADJUSTMENT);
+  if ((topSensor == 0 && secondSensor == 1) || (topSensor == 3 && secondSensor == 0 )||
+      (topSensor > 0 && topSensor < secondSensor)) {
+    newPosition = getTopSensorAngle(topSensor) + 45 - MINOR_ADJUSTMENT;
+  } else {
+    newPosition = getTopSensorAngle(topSensor) - 45 + MINOR_ADJUSTMENT;
+  }
+  Serial.print("new position: "); Serial.println(newPosition);
+}
 
 void FlowerRotation::update(){
   localMotor = new Motor(delayBetweenStep,pin1,pin2,pin3,pin4);
@@ -44,32 +70,31 @@ void FlowerRotation::update(){
     _reading->getFirstSensor(),_reading->getSecondSensor());
     //Serial.print("\nFirstSensor: ");Serial.println(_reading->getFirstSensor());
     //Serial.print("SecondSensor: ");Serial.println(_reading->getSecondSensor());
-  if(newPosition < currentPosition){
+  if(newPosition < currentPosition){git
     //rotate currentPosition - newPosition
     if (currentPosition - newPosition <= 180) {
-      Serial.print("\nANTI: "); Serial.println(static_cast<int>(currentPosition - newPosition));
-      localMotor->toAngleUnticlockwise(angle_steps(static_cast<int>(
+      Serial.print("\nANTI: "); Serial.println(static_cast<float>(currentPosition - newPosition));
+      localMotor->toAngleUnticlockwise(angle_steps(static_cast<float>(
           currentPosition - newPosition)));
     } else {
-      Serial.print("\nCLOCK: "); Serial.println(static_cast<int>(currentPosition - newPosition));
-      localMotor->toAngleClockwise(angle_steps(static_cast<int>(static_cast<int>(
-          currentPosition - newPosition))));
+      Serial.print("\nCLOCK: "); Serial.println(static_cast<float>(newPosition - currentPosition));
+      localMotor->toAngleClockwise(angle_steps(static_cast<float>(static_cast<int>(
+          newPosition - currentPosition))));
     }
   }
   else {
     //rotate newPosition - currentPosition
     if (newPosition - currentPosition <= 180) {
-      Serial.print("\nANTI: "); Serial.println(static_cast<int>(newPosition - currentPosition));
-      localMotor->toAngleUnticlockwise(angle_steps(static_cast<int>(newPosition - currentPosition)));
+      Serial.print("\nANTI: "); Serial.println(angle_steps(static_cast<int>(newPosition - currentPosition)));
+      localMotor->toAngleUnticlockwise(angle_steps(static_cast<float>(newPosition - currentPosition)));
     } else {
-      Serial.print("\nCLOCK: "); Serial.println(static_cast<int>(newPosition - currentPosition));
-      localMotor->toAngleClockwise(angle_steps(static_cast<int>(newPosition - currentPosition)));
+      Serial.print("\nCLOCK: "); Serial.println(angle_steps(static_cast<float>(currentPosition - newPosition)));
+      localMotor->toAngleClockwise(angle_steps(static_cast<int>(currentPosition - newPosition)));
     }
   }
   Serial.println("----------------------------------------------------\n\n");
   currentPosition = newPosition;
   delete _reading;
-  _reading = nullptr;
 }
 
 float FlowerRotation::angle_steps(float angle){
@@ -96,33 +121,6 @@ int FlowerRotation::getTopSensorAngle(int topSensor) {
   return ANGLE_TOP_SENSOR;
 }
 
-void FlowerRotation::rotationAngle(int top, int second, int topSensor, int secondSensor){
-  int MINOR_ADJUSTMENT = 0;
-
-  if(((top<=100) & (top>=0)) & ((second<=100) & (second>=0))){
-    const int LEG_A_BIG_TRIANGLE = 10; //Random, can totally be changed
-    const int LEG_B_BIG_TRIANGLE = 10;
-    const float HYPOTENUSE_BIG_TRIANGLE = sqrt(pow(LEG_A_BIG_TRIANGLE, 2) + pow(LEG_B_BIG_TRIANGLE, 2));
-    float LEG_A_SMALL_TRIANGLE = HYPOTENUSE_BIG_TRIANGLE / 2;
-    float DIFF_PERCENTAGE = top - second; //since the mapped sensor value is to 100 so we can use as %
-    float LEG_A_SMALLER_TRIANGLE = (LEG_A_SMALL_TRIANGLE / 100) * DIFF_PERCENTAGE;
-    float HYPOTENUSE_SMALLER_TRIANGLE = sqrt(pow(LEG_A_SMALL_TRIANGLE, 2) + pow(LEG_A_SMALLER_TRIANGLE, 2));
-    // Angle refers to the angle of rotation from the midpoint of Top Sensor and Second Sensor
-    // This angle is in radians
-    MINOR_ADJUSTMENT = radToDeg(asin(LEG_A_SMALLER_TRIANGLE / HYPOTENUSE_SMALLER_TRIANGLE));
-  }
-  Serial.print("\ntopSensor: "); Serial.println(getTopSensorAngle(topSensor));
-  Serial.print("\nMINOR_ADJUSTMENT: "); Serial.println(MINOR_ADJUSTMENT);
-  if ((topSensor == 0 && secondSensor == 1) || (topSensor == 3 && secondSensor == 0 )||
-      (topSensor > 0 && topSensor < secondSensor)) {
-    newPosition = getTopSensorAngle(topSensor) + 45 - MINOR_ADJUSTMENT;
-  } else {
-    newPosition = getTopSensorAngle(topSensor) - 45 + MINOR_ADJUSTMENT;
-  }
-  // Serial.print("NEW POSITION: "); Serial.println(newPosition);
-  // Serial.print("\nCURRENT POSITION: "); Serial.println(currentPosition);
-}
-
 float FlowerRotation::radToDeg(float rad) {
   return ((rad * 180) / M_PI);
 }
@@ -131,5 +129,3 @@ void FlowerRotation::rotate(){
   //reassign motor
   FlowerRotation::localMotor->clockwise();
 }
-
-float FlowerRotation::currentPosition = 0;

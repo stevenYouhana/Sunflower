@@ -1,5 +1,7 @@
 #include "FlowerRotation.h"
+#include "TestReading.h"
 
+//test leds
 int led1 = 2;
 int led2 = 3;
 int led3 = 4;
@@ -14,12 +16,15 @@ const int STEP_DELAY = 1;
 const byte initSensor = A5;
 
 bool flowerSet;
-FlowerRotation fr;
 
 const int READING_INTERVAL = 10000;
 const int COMPARE_INTERVAL = 20000;
 int sensors[4][10];
 float averages[4];
+
+FlowerRotation fr;
+// Testing
+TestReading tr;
 
 void setup(){
   Serial.begin(9600);
@@ -34,8 +39,9 @@ void setup(){
 
 void loop(){
   //check flowerSet if false initFlower else FlowerRotation
+
   while(!flowerSet){
-    if(mappedReading((analogRead(initSensor))) < 25){
+    if(mappedReading((analogRead(initSensor))) < 15){
       Serial.println("setting flower...");
       Serial.println(mappedReading(analogRead(initSensor)));
       fr.setFlower();
@@ -65,6 +71,7 @@ inline byte getAnalogPins(int i){
     default: return A0; break;
   }
 }
+
 void popSensor(){
   for(int s=0; s<4; s++){
     //INSERT DELAY FOR READINGS
@@ -86,29 +93,9 @@ int mappedReading(int reading){
   return map(reading,0,1023,0,100);
 }
 
-void ledFollow(int second, int first){
-  lightsOff();
-  Serial.println("TOP BIRDS");
-  Serial.println(first);Serial.println(second);
-  digitalWrite(second+2,HIGH);  //led pins startin from 2
-  digitalWrite(first+2,HIGH);
-  delay(10);
-  digitalWrite(first+2,LOW);
-  delay(10);
-}
-void lightsOff(){
-  for(int i=2; i<6; i++){
-    digitalWrite(i,LOW);
-  }
-}
+
 //----------------Tests--------------
-void ledTest(){
-  for(int i=2; i<6; i++){
-    digitalWrite(i,HIGH);
-    delay(10);
-    digitalWrite(i,LOW);
-  }
-}
+
 void testMotor(){
 
 }
