@@ -70,7 +70,7 @@ void FlowerRotation::update(){
     _reading->getFirstSensor(),_reading->getSecondSensor());
     //Serial.print("\nFirstSensor: ");Serial.println(_reading->getFirstSensor());
     //Serial.print("SecondSensor: ");Serial.println(_reading->getSecondSensor());
-  if(newPosition < currentPosition){git
+  if(newPosition < currentPosition){
     //rotate currentPosition - newPosition
     if (currentPosition - newPosition <= 180) {
       Serial.print("\nANTI: "); Serial.println(static_cast<float>(currentPosition - newPosition));
